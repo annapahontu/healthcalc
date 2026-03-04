@@ -87,11 +87,11 @@ public class HealthCalcImpl implements HealthCalc {
         if (height <= 0) {
             throw new InvalidHealthDataException("Height must be positive.");
         }
-        if (weight < 1 || weight > 700) {
+        if (weight < 1.00 || weight > 700.00) {
             throw new InvalidHealthDataException("Weight must be within a possible biological range [1-700] kg.");
         }
-        if (height < 0.30 || height > 3.00) {
-            throw new InvalidHealthDataException("Height must be within a possible biological range [0.30-3.00] m.");
+        if (height < 30 || height > 300) {
+            throw new InvalidHealthDataException("Height must be within a possible biological range [30-300] cm.");
         }
 
 
