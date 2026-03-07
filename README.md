@@ -244,14 +244,50 @@ Para garantizar que la calculadora sea fiable y segura, se han definido los sigu
 <summary><b>Pruebas de Clasificación del Estado de Salud basado en el IMC/BMI</b></summary>
 Para cada categoría, probamos valores que están justo en el límite para asegurar que el cambio de etiqueta es exacto:  
 
-* **Peso bajo (Underweight):** Se comprueba con valores por debajo de 18.5.
+* **Delgadez severa (Severe Thinness):** Se comprueba con valores antes de 16.
+* **Delgadez leve (Mild Thinness):** Se comprueba con valores desde 16 hasta justo antes de 17.
+* **Peso bajo (Underweight):** Se comprueba con valores desde 17 hasta justo antes de 18.5.
 * **Peso normal (Normal weight):** Se comprueba con valores desde 18.5 hasta justo antes de 25.
 * **Sobrepeso (Overweight):** Se comprueba con valores desde 25 hasta justo antes de 30.
-* **Obesidad (Obesity):** Se comprueba con valores desde 30 en adelante.
+* **Obesidad clase I (Class I Obesity):** Se comprueba con valores desde 30 hasta justo antes de 35.
+* **Obesidad clase II (Class II Obesity):** Se comprueba con valores desde 35 hasta justo antes de 40.
+* **Obesidad clase III (Class III Obesity):** Se comprueba con valores desde 40 en adelante.
 * **Seguridad:** Se rechazan clasificaciones para resultados de IMC negativos o absurdamente altos (más de 150).
+</details>
+
+<details>
+<summary><b>Pruebas de Cálculo del Peso Corporal Ideal (PCI / IBW) - Fórmula de Lorentz</b></summary>
+
+* **Cálculo correcto en hombres:** Se comprueba que, al introducir una altura normal para un hombre, el resultado sea el esperado matemáticamente, de acuerdo con la fórmula de Lorentz: 
+
+  $$PCI = (Estatura - 100) - \frac{(Estatura - 150)}{4}$$
+
+* **Cálculo correcto en mujeres:** Se comprueba que, al introducir una altura normal para una mujer, el resultado sea el esperado matemáticamente, de acuerdo con la fórmula de Lorentz:
+
+  $$PCI = (Estatura - 100) - \frac{(Estatura - 150)}{2}$$
+
+* **Comparación por sexo:** Se comprueba que para una misma altura, el resultado PCI sea diferente entre hombre y mujer, tal y como se establece en la fórmula.
+
+* **Protección ante datos imposibles:**
+  * El sistema debe rechazar estaturas menores a 30 cm.
+  * El sistema debe rechazar estaturas mayores a 300 cm.
+
+* **Protección ante errores de escritura:** Se verifica que no se permitan valores negativos o iguales a cero.
 
 </details>
 
+<details>
+<summary><b>Pruebas de Área de Superficie Corporal (ASC) o Body Surface Area (BSA)</b></summary>
+
+* **Cálculo correcto:** Se valida que, al introducir valores normales de peso y altura, el sistema calcule ASC o BSA de forma coherente usando la fórmula de Mosteller
+* **Fórmula (Mosteller):** $BSA = \sqrt{\frac{\text{altura (cm)} \times \text{peso (kg)}}{3600}}$
+
+ * **Protección ante datos imposibles:** 
+    * El sistema debe rechazar pesos menores a 0 kg o superiores a 700 kg.
+    * El sistema debe rechazar alturas menores a 0 cm o superiores a 300 cm.
+    * Se verifica que no se acepten valores negativos o no numéricos.
+
+</details>
 
 ## Instalación y ejecución
 
