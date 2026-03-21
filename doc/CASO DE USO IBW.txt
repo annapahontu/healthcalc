@@ -18,10 +18,10 @@ GARANTÍA DE ÉXITO: El sistema calcula correctamente el peso corporal ideal par
 GARANTÍA MÍNIMA: Regresa al menú principal.
 
 ESCENARIO PRINCIPAL DE ÉXITO: 
- - El usuario selecciona la métrica IBW.
- - El usuario ingresa los datos antropométricos: género y altura (CU-04).
- - El sistema calcula IBW mediante la fórmula de Lorentz.
- - El sistema muestra al usuario el resultado calculado.
+ 1 El usuario selecciona la métrica IBW.
+ 2 El usuario ingresa los datos antropométricos: género y altura (CU-04).
+ 3 El sistema calcula IBW mediante la fórmula de Lorentz.
+ 4 El sistema muestra al usuario el resultado calculado.
 
 EXTENSIONES:
-Los datos introducidos están incompletos: El sistema informa del error y vuelve al caso de uso “Introducir datos” o “Editar datos”. 
+ 2a Los datos introducidos están incompletos: El sistema informa del error y vuelve al caso de uso “Introducir datos” o “Editar datos”. 
