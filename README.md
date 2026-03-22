@@ -340,3 +340,8 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
 
 </details>
+
+## Especificación
+
+### Casos de Uso
+![Diagrama de Casos de Uso](doc/casosDeUso_healthCalc.drawio.png)
