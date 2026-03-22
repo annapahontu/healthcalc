@@ -349,3 +349,4 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 * [CU-01: Calcular BMI](<doc/CASO DE USO BMI.txt>)
 * [CU-02: Calcular BSA](<doc/CASO DE USO BSA.txt>)
 * [CU-03: Calcular IBW](<doc/CASO DE USO IBW.txt>)
+* [CU-04: Introducir datos](<doc/CASO DE USO Introducir datos.txt>)
