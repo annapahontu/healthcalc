@@ -347,3 +347,4 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 ![Diagrama de Casos de Uso](doc/casosDeUso_healthCalc.drawio.png)
 
 [CU-01: Calcular BMI](<doc/CASO DE USO BMI.txt>)
+[CU-02: Calcular BSA](<doc/CASO DE USO BSA.txt>)
