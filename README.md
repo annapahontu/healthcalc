@@ -345,3 +345,5 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 ### Casos de Uso
 ![Diagrama de Casos de Uso](doc/casosDeUso_healthCalc.drawio.png)
+
+[CU-01: Calcular BMI](<doc/CASO DE USO BMI.txt>)
