@@ -336,6 +336,20 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
     *  Intento de cálculo con peso inválido o fuera de rango.
     *  Intento de cálculo con altura inválida o fuera de rango.
 
+<u>Historia de usuario 4</u>: [Clasificación resultado BMI](<java-project-healthcalc/src/test/Resources/healthcalc/Clasificacion.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** que el sistema clasifique mi Índice de Masa Corporal (BMI) 
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Clasificación exitosa de los rangos de peso.
+    *  Clasificación de valores de BMI en los límites de las categorías.
+    *  Intento de clasificación con un valor de BMI inválido. 
+
 ## Instalación y ejecución
 
 <details>
