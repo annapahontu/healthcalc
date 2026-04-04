@@ -321,6 +321,21 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
     *  Intento de cálculo con peso inválido o fuera de rango.
     *  Intento de cálculo con altura inválida o fuera de rango.
 
+<u>Historia de usuario 3</u>: [Cálculo del BMI](<java-project-healthcalc/src/test/Resources/healthcalc/BMI.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular mi Índice de Masa Corporal (BMI) a partir de mi peso y altura
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Verificación de cálculos exitosos estándar.
+    *  Cálculo del BMI en los límites biológicos permitidos.
+    *  Intento de cálculo con peso inválido o fuera de rango.
+    *  Intento de cálculo con altura inválida o fuera de rango.
+
 ## Instalación y ejecución
 
 <details>
