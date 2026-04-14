@@ -1,42 +1,42 @@
 package healthcalc;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
-
+import javax.swing.*;
 import healthcalc.controller.CtrBMI;
-import healthcalc.view.PanelBMI;
+import healthcalc.view.ViewBMIImpl;
 
 public class MainView {
-
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            // 1. Instanciamos el Modelo Global
+            // 1. Instanciar el modelo (común para todos)
             HealthCalc model = new HealthCalcImpl();
 
-            // 2. Creamos la Ventana Principal
-            JFrame frame = new JFrame("Calculadora de Salud - Hospital Universitario");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(600, 400);
-            frame.setLocationRelativeTo(null); // Centrar en pantalla
+            // 2. Crear el JFrame ÚNICO
+            JFrame mainFrame = new JFrame("HealthCalc - Hospital Universitario");
+            mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            mainFrame.setSize(700, 500);
 
-            JTabbedPane tabbedPane = new JTabbedPane();
+            // 3. Crear el contenedor de pestañas VERTICAL (LEFT)
+            JTabbedPane menuVertical = new JTabbedPane(JTabbedPane.LEFT);
 
-            // 3. Pestaña de Introducción
-            JPanel pnlIntro = new JPanel();
-            pnlIntro.add(new javax.swing.JLabel("Bienvenido a HealthCalc. Seleccione una métrica en las pestañas."));
-            tabbedPane.addTab("Inicio", pnlIntro);
+            // --- Panel de Inicio ---
+            JPanel pnlInicio = new JPanel();
+            pnlInicio.add(new JLabel("Bienvenido. Seleccione una métrica en el menú de la izquierda."));
+            menuVertical.addTab("Inicio", pnlInicio);
 
-            // 4. Pestaña de BMI (Vista, Controlador y Ensamblaje)
-            PanelBMI viewBMI = new PanelBMI();
-            CtrBMI ctrBMI = new CtrBMI(model, viewBMI);
-            viewBMI.setController(ctrBMI); // Enlazamos
-            tabbedPane.addTab("Calculadora BMI", viewBMI);
+            // --- Panel de BMI (Tu parte) ---
+            ViewBMIImpl panelBMI = new ViewBMIImpl();
+            CtrBMI controllerBMI = new CtrBMI(model, panelBMI);
+            panelBMI.setController(controllerBMI);
+            menuVertical.addTab("BMI (Masa Corporal)", panelBMI);
 
-            // Añadir el panel de pestañas a la ventana
-            frame.add(tabbedPane);
-            frame.setVisible(true);
+            // --- ESPACIO PARA COMPAÑEROS (BSA e IBW) ---
+            // menuVertical.addTab("BSA (Superficie)", new ViewBSAImpl(...));
+            // menuVertical.addTab("IBW (Peso Ideal)", new ViewIBWImpl(...));
+
+            // 4. Mostrar
+            mainFrame.add(menuVertical);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setVisible(true);
         });
     }
 }
