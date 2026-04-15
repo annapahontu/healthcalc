@@ -27,12 +27,12 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
 
     public ViewBMIImpl() {
         setBorder(new EmptyBorder(20, 20, 20, 20));
-        
+     
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         setLayout(gridBagLayout);
 
         JLabel lblPeso = new JLabel("Introducir peso (kg):");
@@ -62,7 +62,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         gbc_lblWeightError.gridy = 1;
         add(lblWeightError, gbc_lblWeightError);
 
-
         JLabel lblAltura = new JLabel("Introducir altura (cm):");
         GridBagConstraints gbc_lblAltura = new GridBagConstraints();
         gbc_lblAltura.anchor = GridBagConstraints.EAST;
@@ -80,7 +79,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         add(txtHeight, gbc_txtHeight);
         txtHeight.setColumns(10);
 
-
         lblHeightError = new JLabel(" ");
         lblHeightError.setForeground(Color.RED);
         lblHeightError.setFont(new Font("Arial", Font.ITALIC, 11));
@@ -91,7 +89,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         gbc_lblHeightError.gridy = 3;
         add(lblHeightError, gbc_lblHeightError);
 
-  
         chkClassification = new JCheckBox("¿Desea ver la clasificación de la OMS?");
         GridBagConstraints gbc_chkClassification = new GridBagConstraints();
         gbc_chkClassification.anchor = GridBagConstraints.WEST;
@@ -101,7 +98,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         gbc_chkClassification.gridy = 4;
         add(chkClassification, gbc_chkClassification);
 
-
         btnCalculate = new JButton("Calcular BMI");
         GridBagConstraints gbc_btnCalculate = new GridBagConstraints();
         gbc_btnCalculate.gridwidth = 2;
@@ -109,19 +105,16 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         gbc_btnCalculate.gridx = 0;
         gbc_btnCalculate.gridy = 5;
         add(btnCalculate, gbc_btnCalculate);
-                        
 
         lblResult = new JLabel("Resultado: ");
         lblResult.setFont(new Font("Arial", Font.BOLD, 13));
         GridBagConstraints gbc_lblResult = new GridBagConstraints();
-        gbc_lblResult.insets = new Insets(0, 0, 5, 0);
         gbc_lblResult.gridwidth = 2;
         gbc_lblResult.gridx = 0;
         gbc_lblResult.gridy = 6;
         add(lblResult, gbc_lblResult);
     }
-
-    // --- Implementación de la Interfaz ViewBMI ---
+ 
     @Override public String getWeightInput() { return txtWeight.getText().trim(); }
     @Override public String getHeightInput() { return txtHeight.getText().trim(); }
     @Override public boolean wantsClassification() { return chkClassification.isSelected(); }
@@ -129,7 +122,7 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
     @Override 
     public void setResult(String res) { 
         lblResult.setText(res); 
-        lblResult.setForeground(new Color(0, 100, 0)); 
+        lblResult.setForeground(new Color(0, 100, 0));
     }
     
     @Override public void setWeightError(String msg) { lblWeightError.setText(msg); }
@@ -146,6 +139,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
     @Override 
     public void setController(ActionListener ctr) { 
         btnCalculate.addActionListener(ctr);
-        btnCalculate.setActionCommand("CALCULAR_BMI"); // Importante para el Controlador Centralizado
+        btnCalculate.setActionCommand("CALCULAR_BMI"); 
     }
 }
