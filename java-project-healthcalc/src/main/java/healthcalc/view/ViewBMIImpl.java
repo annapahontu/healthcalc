@@ -1,8 +1,17 @@
 package healthcalc.view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class ViewBMIImpl extends JPanel implements ViewBMI {
@@ -16,7 +25,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
     private JLabel lblResult;
 
     public ViewBMIImpl() {
-        // Configuramos el panel con márgenes y diseño de cuadrícula flexible
         this.setLayout(new GridBagLayout());
         this.setBorder(new EmptyBorder(20, 20, 20, 20));
         GridBagConstraints gbc = new GridBagConstraints();
@@ -51,7 +59,7 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         lblHeightError.setFont(new Font("Arial", Font.ITALIC, 11));
         add(lblHeightError, gbc);
 
-        // --- Clasificación (Checkbox) ---
+        // --- Clasificación ---
         gbc.gridx = 0; gbc.gridy = 4; gbc.gridwidth = 2;
         chkClassification = new JCheckBox("¿Desea ver la clasificación de la OMS?");
         add(chkClassification, gbc);
@@ -68,7 +76,6 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
         add(lblResult, gbc);
     }
 
-    // Implementación de los métodos de la interfaz
     @Override public String getWeightInput() { return txtWeight.getText().trim(); }
     @Override public String getHeightInput() { return txtHeight.getText().trim(); }
     @Override public boolean wantsClassification() { return chkClassification.isSelected(); }
