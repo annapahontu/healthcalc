@@ -7,7 +7,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
 import healthcalc.controller.CtrBMI;
+import healthcalc.controller.CtrIBW;
 import healthcalc.view.ViewBMIImpl;
+import healthcalc.view.ViewIBWImpl;
 
 public class MainView {
     public static void main(String[] args) {
@@ -26,6 +28,11 @@ public class MainView {
             menuVertical.addTab("BMI (Masa Corporal)", panelBMI);
             
             
+            ViewIBWImpl panelIBW = new ViewIBWImpl();
+            CtrIBW controllerIBW = new CtrIBW(model, panelIBW);
+            panelIBW.setController(controllerIBW);
+            menuVertical.addTab("IBW (Peso Ideal)", panelIBW);
+         
             mainFrame.add(menuVertical);
             mainFrame.setLocationRelativeTo(null);
             mainFrame.setVisible(true);
