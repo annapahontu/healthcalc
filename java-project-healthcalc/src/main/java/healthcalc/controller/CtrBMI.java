@@ -8,82 +8,112 @@ import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewBMI;
 
 public class CtrBMI implements ActionListener {
-    private HealthCalc model;
-    private ViewBMI view;
+    private HealthCalc modelo;
+    private ViewBMI vistaBMI;
 
-    public CtrBMI(HealthCalc model, ViewBMI view) {
-        this.model = model;
-        this.view = view;
+    public CtrBMI(HealthCalc modelo, ViewBMI vistaBMI) {
+        this.modelo = modelo;
+        this.vistaBMI = vistaBMI;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        view.clearErrors();
+        vistaBMI.clearErrors();
         
-        String weightStr = view.getWeightInput();
-        String heightStr = view.getHeightInput();
+        String w = vistaBMI.getWeightInput();
+        String h = vistaBMI.getHeightInput();
     
         boolean hayError = false;
 
-        if (weightStr.isEmpty()) {
-            view.setWeightError("Error: El campo no puede estar vacío.");
+//=======================================================================================================================
+        // Validar si el campo está vacío 
+        
+        if (w.isEmpty()) {
+            vistaBMI.setWeightError("Error: El campo no puede estar vacío.");
             hayError = true;
         }
-        if (heightStr.isEmpty()) {
-            view.setHeightError("Error: El campo no puede estar vacío.");
+        if (h.isEmpty()) {
+            vistaBMI.setHeightError("Error: El campo no puede estar vacío.");
             hayError = true;
         }
 
         if (hayError) return; 
 
+//=======================================================================================================================      
+        // Validar si se han puesto comas. 
+        
+        if (w.contains(",")) {
+            vistaBMI.setWeightError("Error: Use '.' en lugar de ',' para los decimales.");
+            hayError = true;
+        }
+        if (h.contains(",")) {
+            vistaBMI.setHeightError("Error: Use '.' en lugar de ',' para los decimales.");
+            hayError = true;
+        }
+
+        if (hayError) return;
+
+//=======================================================================================================================
+        // Ver si se han introducido números o letras.
+        
         double weight = 0;
         double heightCm = 0;
 
         try {
-            weight = Double.parseDouble(weightStr);
+            weight = Double.parseDouble(w);
         } catch (NumberFormatException ex) {
-            view.setWeightError("Error: Introduzca solo números.");
+            vistaBMI.setWeightError("Error: Introduzca solo números válidos.");
             hayError = true;
         }
 
         try {
-            heightCm = Double.parseDouble(heightStr);
+            heightCm = Double.parseDouble(h);
         } catch (NumberFormatException ex) {
-            view.setHeightError("Error: Introduzca solo números.");
+            vistaBMI.setHeightError("Error: Introduzca solo números válidos.");
             hayError = true;
         }
 
         if (hayError) return;
 
+      //=======================================================================================================================
+
+        // Validar números negativos
         if (weight < 0) {
-            view.setWeightError("Error: El valor no puede ser negativo.");
+            vistaBMI.setWeightError("Error: El valor no puede ser negativo.");
             hayError = true;
         }
         if (heightCm < 0) {
-            view.setHeightError("Error: El valor no puede ser negativo.");
+            vistaBMI.setHeightError("Error: El valor no puede ser negativo.");
             hayError = true;
         }
 
         if (hayError) return;
 
+      //=======================================================================================================================
+        
+        // Valores fisiológicos
+        
         try {
-            double bmi = model.bmi(weight, heightCm / 100.0);
+            double bmi = modelo.bmi(weight, heightCm / 100.0);
             String out = String.format("Resultado BMI: %.2f", bmi);
 
-            if (view.wantsClassification()) {
-                out += " - " + model.bmiClassification(bmi);
+            if (vistaBMI.wantsClassification()) {
+                out += " - " + modelo.bmiClassification(bmi);
             }
             
-            view.setResult(out);
+            vistaBMI.setResult(out);
 
+            // También tratamos el hecho de que la clasficación no se puede calcular si el BMI es mayor que 150. 
         } catch (InvalidHealthDataException ex) {
             String errorMsg = ex.getMessage().toLowerCase();
             
             if (errorMsg.contains("peso") || errorMsg.contains("weight")) {
-                view.setWeightError("Error: Fuera de límites biológicos (1-700 kg).");
+                vistaBMI.setWeightError("Error: Fuera de límites biológicos (1-700 kg).");
             } else if (errorMsg.contains("altura") || errorMsg.contains("height")) {
-                view.setHeightError("Error: Fuera de límites biológicos (30-300 cm).");
+                vistaBMI.setHeightError("Error: Fuera de límites biológicos (30-300 cm).");
+            } else {
+                vistaBMI.setResult("<html><font color='red'>Error: El BMI es mayor que 150.<br>No se puede calcular la clasificación.</font></html>");
             }
         }
-    }
+        }
 }
