@@ -1,14 +1,15 @@
 package healthcalc;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
 import healthcalc.controller.CtrBMI;
+import healthcalc.controller.CtrBSA;
 import healthcalc.controller.CtrIBW;
 import healthcalc.view.ViewBMIImpl;
+import healthcalc.view.ViewBSAImpl;
 import healthcalc.view.ViewIBWImpl;
 
 public class MainView {
@@ -21,7 +22,7 @@ public class MainView {
 
             JTabbedPane menuVertical = new JTabbedPane(JTabbedPane.LEFT);
 
-            // --- Panel de BMI---
+         // --- Panel de BMI---
             ViewBMIImpl panelBMI = new ViewBMIImpl();
             CtrBMI controllerBMI = new CtrBMI(model, panelBMI);
             panelBMI.setController(controllerBMI);
@@ -33,6 +34,18 @@ public class MainView {
             panelIBW.setController(controllerIBW);
             menuVertical.addTab("IBW (Peso Ideal)", panelIBW);
          
+            mainFrame.add(menuVertical);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setVisible(true);
+            
+            
+            // --- Panel de BSA---
+            ViewBSAImpl panelBSA = new ViewBSAImpl();
+            CtrBSA controllerBSA = new CtrBSA(panelBSA, model);
+            panelBSA.setController(controllerBSA);
+            menuVertical.addTab("BSA (Masa Corporal)", panelBSA);
+            
+            
             mainFrame.add(menuVertical);
             mainFrame.setLocationRelativeTo(null);
             mainFrame.setVisible(true);
