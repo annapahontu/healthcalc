@@ -46,6 +46,9 @@ public class CtrIBW implements ActionListener {
             heightCm = Double.parseDouble(h);
         } catch (NumberFormatException ex) {
             vistaIBW.setHeightError("Error: Introduzca solo números.");
+            if (h.contains(",")) {
+        	    vistaIBW.setHeightError("Error: Use '.' en lugar de ',' para los decimales.");
+            }
             Error = true;
         }
         if (Error) return;
@@ -56,14 +59,6 @@ public class CtrIBW implements ActionListener {
         if (heightCm < 0) {
             vistaIBW.setHeightError("Error: El valor no puede ser negativo.");
             Error = true;
-        }
-        if (Error) return;
-
-//=======================================================================================================================
-
-        if (h.contains(",")) {
-        	vistaIBW.setHeightError("Error: Use '.' en lugar de ',' para los decimales.");
-        	Error = true;
         }
         if (Error) return;
 

@@ -37,7 +37,7 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
 
         JLabel lblPeso = new JLabel("Introducir peso (kg):");
         GridBagConstraints gbc_lblPeso = new GridBagConstraints();
-        gbc_lblPeso.anchor = GridBagConstraints.EAST;
+        gbc_lblPeso.anchor = GridBagConstraints.WEST;
         gbc_lblPeso.insets = new Insets(5, 5, 5, 5);
         gbc_lblPeso.gridx = 0;
         gbc_lblPeso.gridy = 0;
@@ -64,7 +64,7 @@ public class ViewBMIImpl extends JPanel implements ViewBMI {
 
         JLabel lblAltura = new JLabel("Introducir altura (cm):");
         GridBagConstraints gbc_lblAltura = new GridBagConstraints();
-        gbc_lblAltura.anchor = GridBagConstraints.EAST;
+        gbc_lblAltura.anchor = GridBagConstraints.WEST;
         gbc_lblAltura.insets = new Insets(5, 5, 5, 5);
         gbc_lblAltura.gridx = 0;
         gbc_lblAltura.gridy = 2;

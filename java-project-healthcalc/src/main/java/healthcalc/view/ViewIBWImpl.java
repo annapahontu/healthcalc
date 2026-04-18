@@ -32,14 +32,14 @@ public class ViewIBWImpl extends JPanel implements ViewIBW {
      
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 140, 140, 0};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
         setLayout(gridBagLayout);
         
                 JLabel lblAltura = new JLabel("Introducir altura (cm):");
                 GridBagConstraints gbc_lblAltura = new GridBagConstraints();
-                gbc_lblAltura.anchor = GridBagConstraints.EAST;
+                gbc_lblAltura.anchor = GridBagConstraints.WEST;
                 gbc_lblAltura.insets = new Insets(5, 5, 5, 5);
                 gbc_lblAltura.gridx = 0;
                 gbc_lblAltura.gridy = 0;
@@ -48,7 +48,7 @@ public class ViewIBWImpl extends JPanel implements ViewIBW {
                 txtHeightIBW = new JTextField();
                 GridBagConstraints gbc_txtHeightIBW = new GridBagConstraints();
                 gbc_txtHeightIBW.gridwidth = 2;
-                gbc_txtHeightIBW.insets = new Insets(5, 5, 5, 0);
+                gbc_txtHeightIBW.insets = new Insets(5, 5, 5, 5);
                 gbc_txtHeightIBW.fill = GridBagConstraints.HORIZONTAL;
                 gbc_txtHeightIBW.gridx = 1;
                 gbc_txtHeightIBW.gridy = 0;
@@ -60,7 +60,7 @@ public class ViewIBWImpl extends JPanel implements ViewIBW {
                 lblHeightError.setFont(new Font("Arial", Font.ITALIC, 11));
                 GridBagConstraints gbc_lblHeightError = new GridBagConstraints();
                 gbc_lblHeightError.anchor = GridBagConstraints.WEST;
-                gbc_lblHeightError.insets = new Insets(0, 5, 5, 0);
+                gbc_lblHeightError.insets = new Insets(0, 5, 5, 5);
                 gbc_lblHeightError.gridx = 1;
                 gbc_lblHeightError.gridy = 1;
                 add(lblHeightError, gbc_lblHeightError);
@@ -85,29 +85,30 @@ public class ViewIBWImpl extends JPanel implements ViewIBW {
         tglbtnM = new JToggleButton("M");
         GridBagConstraints gbc_tglbtnM = new GridBagConstraints();
         gbc_tglbtnM.fill = GridBagConstraints.HORIZONTAL;
-        gbc_tglbtnM.insets = new Insets(0, 0, 5, 0);
+        gbc_tglbtnM.insets = new Insets(0, 0, 5, 5);
         gbc_tglbtnM.gridx = 2;
         gbc_tglbtnM.gridy = 2;
         add(tglbtnM, gbc_tglbtnM);
         
         buttonGroup.add(tglbtnH);
         buttonGroup.add(tglbtnM);
-
-        btnCalculateIBW = new JButton("Calcular IBW");
-        GridBagConstraints gbc_btnCalculateIBW = new GridBagConstraints();
-        gbc_btnCalculateIBW.gridwidth = 3;
-        gbc_btnCalculateIBW.insets = new Insets(5, 5, 5, 0);
-        gbc_btnCalculateIBW.gridx = 0;
-        gbc_btnCalculateIBW.gridy = 5;
-        add(btnCalculateIBW, gbc_btnCalculateIBW);
-
-        lblResult = new JLabel("Resultado: ");
-        lblResult.setFont(new Font("Arial", Font.BOLD, 13));
-        GridBagConstraints gbc_lblResult = new GridBagConstraints();
-        gbc_lblResult.gridwidth = 3;
-        gbc_lblResult.gridx = 0;
-        gbc_lblResult.gridy = 7;
-        add(lblResult, gbc_lblResult);
+                        
+                                btnCalculateIBW = new JButton("Calcular IBW");
+                                GridBagConstraints gbc_btnCalculateIBW = new GridBagConstraints();
+                                gbc_btnCalculateIBW.gridwidth = 4;
+                                gbc_btnCalculateIBW.insets = new Insets(5, 5, 5, 5);
+                                gbc_btnCalculateIBW.gridx = 0;
+                                gbc_btnCalculateIBW.gridy = 5;
+                                add(btnCalculateIBW, gbc_btnCalculateIBW);
+                        
+                                lblResult = new JLabel("Resultado: ");
+                                lblResult.setFont(new Font("Arial", Font.BOLD, 18));
+                                GridBagConstraints gbc_lblResult = new GridBagConstraints();
+                                gbc_lblResult.insets = new Insets(0, 0, 5, 0);
+                                gbc_lblResult.gridwidth = 6;
+                                gbc_lblResult.gridx = 0;
+                                gbc_lblResult.gridy = 7;
+                                add(lblResult, gbc_lblResult);
     }
  
     @Override public String getHeightInput() { return txtHeightIBW.getText().trim(); }
