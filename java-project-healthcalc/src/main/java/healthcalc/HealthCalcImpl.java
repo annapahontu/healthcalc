@@ -4,6 +4,20 @@ import healthcalc.exceptions.InvalidHealthDataException;
 
 public class HealthCalcImpl implements HealthCalc {
 
+    // Realizar Singleton
+    private static HealthCalcImpl instance;
+
+    // Constructor
+    private HealthCalcImpl() {}
+
+    // Método getInstance
+    public static HealthCalcImpl getInstance() {
+        if (instance == null) {
+            instance = new HealthCalcImpl();
+        }
+        return instance;
+    }
+
     @Override
     public String bmiClassification(double bmi) throws InvalidHealthDataException {
         if (bmi < 0) {
