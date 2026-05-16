@@ -1,7 +1,5 @@
 package healthcalc;
 
-import healthcalc.HealthHospital;
-import healthcalc.HealthStats;
 
 public class HealthProxy implements HealthHospital, HealthStats {
     
