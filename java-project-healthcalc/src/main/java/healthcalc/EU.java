@@ -6,23 +6,12 @@ public class EU extends BaseDecoratorRegion {
     }
 
     @Override
-    public Tuple<Float, String> indiceMasaCorporal(float height, int weight) {
-        // Conversión según el enunciado
-        int pesoKg = weight / 1000; // Paso de gramos a kg
-        float alturaMetros = height / 100; // Paso de centímetros a metros
-
-        Tuple<Float, String> result = super.indiceMasaCorporal(alturaMetros, pesoKg);
-        float bmi = result.getFirst();
-        String classification = result.getSecond();
-
-        return new Tuple<>(bmi, classification);
+    public Tuple<Float, String> indiceMasaCorporal(float heightMetros, int weightGramos) {
+        return super.indiceMasaCorporal(heightMetros, weightGramos);
     }
     
     @Override
-    public int pesoCorporalIdeal(char genero, float altura) {
-        float alturaMetros = altura / 100; // Paso de centímetros a metros
-
-        int idealWeight = super.pesoCorporalIdeal(genero, alturaMetros);
-        return idealWeight;
+    public int pesoCorporalIdeal(char genero, float alturaMetros) {
+        return super.pesoCorporalIdeal(genero, alturaMetros);
     }
 }
