@@ -359,6 +359,39 @@ Capturas de pantalla de las vistas de la HealthCalc:
 - Visualizado de la pestaña IBW: [IBW](doc/GUI/ibw.png)
 - Visualizado de la pestaña BSA: [BSA](doc/GUI/bsa.png)
 
+## Práctica 6: Patrones de diseño
+
+### 1. Patrón Singleton
+Para garantizar que toda la aplicación y sus diferentes componentes utilicen la misma y única instancia de la calculadora, hemos aplicado el patrón **Singleton**. 
+
+* **Diagrama UML:**
+
+![Diagrama UML Singleton](design_patterns/Singleton_UML.png)
+
+---
+
+### 2. Patrón Adapter
+El sistema informático del hospital requería usar la interfaz `HealthHospital`, la cual maneja unidades diferentes (gramos en lugar de kilogramos) y nombres de métodos distintos. Se ha aplicado el patrón **Adapter**.
+
+* **Diagrama UML:**
+![Diagrama UML Adapter](design_patterns/Adapter_UML.png)
+
+---
+
+### 3. Patrón Proxy
+Para llevar un registro de las veces que se utiliza la calculadora y poder extraer estadísticas, hemos implementado el patrón **Proxy**.
+
+* **Diagrama UML:**
+![Diagrama UML Proxy](design_patterns/Proxy_UML.png)
+
+---
+
+### 4. Patrón Decorator
+El hospital recibe pacientes internacionales, por lo que requerían dos versiones de la calculadora (Europea y Americana) y mostrar mensajes bilingües (Español e Inglés) por pantalla. Para ello, se ha usado el patrón **Decorator**.
+
+* **Diagrama UML:**
+![Diagrama UML Decorator](design_patterns/Decorator_UML.png)
+
 ## Instalación y ejecución
 
 <details>
