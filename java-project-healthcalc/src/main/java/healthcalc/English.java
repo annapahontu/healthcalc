@@ -14,9 +14,9 @@ public class English extends BaseDecoratorLanguage {
     @Override
     public int pesoCorporalIdeal(char genero, float altura) {
         char gender;
-        if (genero == 'M') {
+        if (Character.toUpperCase(genero) == 'M') {
             gender = 'H';
-        } else if (genero == 'F') {
+        } else if (Character.toUpperCase(genero) == 'F') {
             gender = 'M';
         } else {
             throw new IllegalArgumentException("Invalid gender. Please use 'M' or 'F'.");
