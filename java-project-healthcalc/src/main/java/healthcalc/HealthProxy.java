@@ -1,11 +1,9 @@
 package healthcalc;
 
-
 public class HealthProxy implements HealthHospital, HealthStats {
     
     private final HealthHospital realHospital;
 
-    // Atributos privados para almacenar los datos
     private float sumaAltura = 0;
     private int cuentaAltura = 0;
 
@@ -17,28 +15,23 @@ public class HealthProxy implements HealthHospital, HealthStats {
 
     private int hombres = 0;
     private int mujeres = 0;
-    private int totalPacientes = 0;
 
-    // Constructor
     public HealthProxy() {
         this.realHospital = new HealthHospitalAdapter();
     }
 
-    // Constructor alternativo
     public HealthProxy(HealthHospital realHospital) {
         this.realHospital = realHospital;
     }
 
     @Override
     public Tuple<Float, String> indiceMasaCorporal(float altura, int peso) {
-        // Cálculo hecho a través del adaptador
         Tuple<Float, String> resultado = realHospital.indiceMasaCorporal(altura, peso);
 
-        // Registramos los datos
         this.sumaAltura += altura;
         this.cuentaAltura++;
 
-        this.sumaPeso += peso; // El peso se acumula en gramos tal como lo envía el HealthHospital
+        this.sumaPeso += peso;
         this.cuentaPeso++;
 
         if (resultado != null && resultado.getFirst() != null) {
@@ -46,29 +39,22 @@ public class HealthProxy implements HealthHospital, HealthStats {
             this.cuentaImc++;
         }
 
-        this.totalPacientes++;
-
         return resultado;
     }
 
     @Override
     public int pesoCorporalIdeal(char genero, float altura) {
-        // Cálculo hecho a través del adaptador
         int resultado = realHospital.pesoCorporalIdeal(genero, altura);
 
-        // Registrar los datos
         this.sumaAltura += altura;
         this.cuentaAltura++;
 
-        // Control de género
         char g = Character.toUpperCase(genero);
-        if (g == 'H') {
+        if (g == 'M') {
             this.hombres++;
-        } else if (g == 'M') {
+        } else if (g == 'F') {
             this.mujeres++;
         }
-
-        this.totalPacientes++;
 
         return resultado;
     }
@@ -109,6 +95,7 @@ public class HealthProxy implements HealthHospital, HealthStats {
 
     @Override
     public int numTotalPacientes() {
-        return this.totalPacientes;
+        int totalPorGenero = this.hombres + this.mujeres;
+        return Math.max(this.cuentaImc, totalPorGenero);
     }
 }
