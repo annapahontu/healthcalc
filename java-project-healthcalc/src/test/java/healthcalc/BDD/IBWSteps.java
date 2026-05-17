@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class IBWSteps {
 
-    private HealthCalc calculator = new HealthCalcImpl();
+    private HealthCalc calculator = HealthCalcImpl.getInstance();
     private double height;
     private char gender;
     private double result;

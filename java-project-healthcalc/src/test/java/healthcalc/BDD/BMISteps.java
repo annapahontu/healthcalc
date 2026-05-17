@@ -22,7 +22,7 @@ public class BMISteps {
 
     @Given("la calculadora de salud debe estar iniciada para BMI")
     public void la_calculadora_de_salud_debe_estar_iniciada_para_BMI() {
-        this.calculator = new HealthCalcImpl();
+        this.calculator = HealthCalcImpl.getInstance();
     }
 
     @Given("el usuario ha seleccionado la métrica de BMI para calcular")
