@@ -28,7 +28,7 @@ public class Main {
             System.out.println("Hombres: " + proxy.numSexoH());
             System.out.println("Mujeres: " + proxy.numSexoM());
             System.out.println("Altura Media: " + proxy.alturaMedia() + " metros");
-            System.out.println("Peso Medio: " + proxy.pesoMedio() + " gramos");
+            System.out.println("Peso Medio: " + proxy.pesoMedio() + " gramos \t" + "(" + proxy.pesoMedio() / 1000.0 + " kg)");
             System.out.println("IMC Medio: " + proxy.imcMedio());
 
         } catch (Exception e) {
