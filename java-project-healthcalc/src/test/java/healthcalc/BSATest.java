@@ -24,7 +24,7 @@ public class BSATest {
 
     @BeforeEach
     void setUp() {
-        healthCalc = new HealthCalcImpl();
+        healthCalc = HealthCalcImpl.getInstance();
     }
 
     @Nested
