@@ -1,6 +1,5 @@
 package healthcalc;
 
-//El adaptador implementa la interfaz del cliente
 public class HealthHospitalAdapter implements HealthHospital {
 
     private HealthCalc calculator;
@@ -12,9 +11,9 @@ public class HealthHospitalAdapter implements HealthHospital {
     @Override
     public Tuple<Float, String> indiceMasaCorporal(float altura, int peso) {
         double pesoKg = peso / 1000.0;
-        double alturaCm = altura * 100.0;
-
-        double bmiResult = calculator.bmi(pesoKg, alturaCm);
+        
+        // Pasamos "altura" directamente, ya que viene en metros (ej. 1.83) y bmi() espera metros.
+        double bmiResult = calculator.bmi(pesoKg, altura);
         String clasificacion = calculator.bmiClassification(bmiResult);
 
         return new Tuple<>((float) bmiResult, clasificacion);
@@ -22,8 +21,24 @@ public class HealthHospitalAdapter implements HealthHospital {
 
     @Override
     public int pesoCorporalIdeal(char genero, float altura) {
+        // 1. Traducimos el género del Hospital (Español) a la Calculadora (Inglés)
+        char generoCalculadora;
+        char g = Character.toUpperCase(genero);
+        
+        if (g == 'H') {
+            generoCalculadora = 'M'; // Hombre -> Male
+        } else if (g == 'M') {
+            generoCalculadora = 'F'; // Mujer -> Female
+        } else {
+            generoCalculadora = genero; // Por si acaso
+        }
+
+        // 2. Traducimos la altura a centímetros (esto ya lo teníamos bien)
         double alturaCm = altura * 100.0;
-        double pesoIdeal = calculator.ibw(alturaCm, genero);
+        
+        // 3. Llamamos a la calculadora base con la letra correcta en inglés
+        double pesoIdeal = calculator.ibw(alturaCm, generoCalculadora);
+        
         return (int) pesoIdeal;
     }
 }
