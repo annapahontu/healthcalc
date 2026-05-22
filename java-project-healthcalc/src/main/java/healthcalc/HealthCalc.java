@@ -43,7 +43,7 @@ public interface HealthCalc {
 	 * @return	  		The Ideal Body Weight of the person (kg).
 	 * @throws Exception
 	 */
-	public double ibw(double height, char gender) throws InvalidHealthDataException;
+	public double ibw(double height, Gender gender) throws InvalidHealthDataException;
 
 	/**
 	 * Calculate the IBW of a person using the Lorentz formula:
