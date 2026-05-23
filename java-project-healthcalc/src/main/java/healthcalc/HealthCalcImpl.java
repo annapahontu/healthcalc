@@ -71,7 +71,7 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public double ibw(double height, char gender) throws InvalidHealthDataException {
+    public double ibw(double height, Gender gender) throws InvalidHealthDataException {
         // Initial exception
         if (height < 30 || height > 300) {
             throw new InvalidHealthDataException("Height must be within a possible biological range [30-300] cm.");
@@ -79,12 +79,12 @@ public class HealthCalcImpl implements HealthCalc {
         
         // Management of the gender parameter
         double v_aux = -1;
-        if (Character.toUpperCase(gender)== 'M'){
+        if (gender == Gender.MALE){
             v_aux = 4;
-        } else if (Character.toUpperCase(gender) == 'F'){
+        } else if (gender == Gender.FEMALE){
             v_aux = 2;
         } else {
-            throw new InvalidHealthDataException("Gender must be 'm' or 'f'."); // Exception for non-considered gender parameters
+            throw new InvalidHealthDataException("Gender must be 'MALE' or 'FEMALE'."); // Exception for non-considered gender parameters
         }
 
         // Calculations of the result

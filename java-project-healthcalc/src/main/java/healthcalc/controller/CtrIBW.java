@@ -3,6 +3,7 @@ package healthcalc.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import healthcalc.Gender;
 import healthcalc.HealthCalc;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewIBW;
@@ -65,9 +66,9 @@ public class CtrIBW implements ActionListener {
 //=======================================================================================================================
 
         // Lectura de género
-        char gender = 'M';
+        Gender gender = Gender.MALE;
         if (!vistaIBW.isMaleSelected()) {
-        	gender = 'F';
+            gender = Gender.FEMALE;
         }
         
 //=======================================================================================================================

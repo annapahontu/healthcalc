@@ -21,16 +21,16 @@ public class HealthHospitalAdapter implements HealthHospital {
 
     @Override
     public int pesoCorporalIdeal(char genero, float altura) {
-        // 1. Traducimos el género del Hospital (Español) a la Calculadora (Inglés)
-        char generoCalculadora;
+        // 1. Traducimos el género del Hospital (char en español) al Enum de la calculadora
+        Gender generoCalculadora;
         char g = Character.toUpperCase(genero);
-        
+    
         if (g == 'H') {
-            generoCalculadora = 'M'; // Hombre -> Male
+            generoCalculadora = Gender.MALE; 
         } else if (g == 'M') {
-            generoCalculadora = 'F'; // Mujer -> Female
+            generoCalculadora = Gender.FEMALE;
         } else {
-            generoCalculadora = genero; // Por si acaso
+            throw new IllegalArgumentException("Género recibido del hospital no válido: " + genero);
         }
 
         // 2. Traducimos la altura a centímetros (esto ya lo teníamos bien)
