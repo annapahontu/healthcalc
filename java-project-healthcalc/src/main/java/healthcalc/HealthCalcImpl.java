@@ -20,37 +20,19 @@ public class HealthCalcImpl implements HealthCalc {
 
     @Override
     public String bmiClassification(double bmi) throws InvalidHealthDataException {
+        // Tratamos los posibles errores
         if (bmi < 0) {
-            throw new InvalidHealthDataException("BMI cannot be negative.");
+            throw new InvalidHealthDataException("BMI must be a positive value.");
         }
         if (bmi > 150) {
             throw new InvalidHealthDataException("BMI must be within a possible biological range [0-150].");
         }
-        String result = "Obesity";
-        // if (bmi < 18.5) {
-        //     result = "Underweight";
-        // } else if (bmi >= 18.5 && bmi < 25) {
-        //     result = "Normal weight";
-        // } else if (bmi >= 25 && bmi < 30) {
-        //     result = "Overweight";
-        // }
-        if (bmi < 16) {
-            result = "Severe thinness";
-        } else if (bmi < 17) {
-            result = "Moderate thinness";
-        } else if (bmi < 18.5) {
-            result = "Mild thinness";
-        } else if (bmi < 25) {
-            result = "Normal weight";
-        } else if (bmi < 30) {
-            result = "Overweight";
-        } else if (bmi < 35) {
-            result = "Obese Class I";
-        } else if (bmi < 40) {
-            result = "Obese Class II";
-        } else {
-            result = "Obese Class III";}
-        return result;  
+        for (BMICategory category : BMICategory.values()) {
+            if (bmi >= category.getMinBMI() && bmi < category.getMaxBMI()) {
+                return category.getLabel();
+            }
+        }
+        throw new InvalidHealthDataException("BMI value is out of any defined category range.");
     }
 
     @Override
