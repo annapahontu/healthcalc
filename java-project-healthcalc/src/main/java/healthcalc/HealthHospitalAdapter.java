@@ -25,9 +25,9 @@ public class HealthHospitalAdapter implements HealthHospital {
         Gender generoCalculadora;
         char g = Character.toUpperCase(genero);
     
-        if (g == 'H') {
+        if (g == 'M') {
             generoCalculadora = Gender.MALE; 
-        } else if (g == 'M') {
+        } else if (g == 'F') {
             generoCalculadora = Gender.FEMALE;
         } else {
             throw new IllegalArgumentException("Género recibido del hospital no válido: " + genero);
