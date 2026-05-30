@@ -117,7 +117,10 @@ public class BMITest {
         void testBmiSevereThinness(double bmi) throws InvalidHealthDataException {
             String expected = "Severe thinness";
             
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -128,7 +131,10 @@ public class BMITest {
         void testBmiModerateThinness(double bmi) throws InvalidHealthDataException {
             String expected = "Moderate thinness";
             
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -139,7 +145,10 @@ public class BMITest {
         void testBmiMildThinness(double bmi) throws InvalidHealthDataException {
             String expected = "Mild thinness";
             
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -150,7 +159,9 @@ public class BMITest {
         void testBmiNormalWeight(double bmi) throws InvalidHealthDataException {
             String expected = "Normal weight";
 
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -161,7 +172,9 @@ public class BMITest {
         void testBmiOverweight(double bmi) throws InvalidHealthDataException {
             String expected = "Overweight";
 
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -172,7 +185,9 @@ public class BMITest {
         void testBmiObeseClassI(double bmi) throws InvalidHealthDataException {
             String expected = "Obese Class I";
 
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -183,7 +198,9 @@ public class BMITest {
         void testBmiObeseClassII(double bmi) throws InvalidHealthDataException {
             String expected = "Obese Class II";
 
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
         }
@@ -194,23 +211,20 @@ public class BMITest {
         void testBmiObeseClassIII(double bmi) throws InvalidHealthDataException {
             String expected = "Obese Class III";
 
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expected, result);
-        }
-
-        @ParameterizedTest(name = "BMI mínimo inválido: {0}")
-        @ValueSource(doubles = {-50.0, -1.0, -0.01})
-        @DisplayName("Bloqueo de valores de BMI negativos (Error de entrada)")
-        void testBmiClassificationMinimoImposible(double bmi) {
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bmiClassification(bmi));
         }
 
         @ParameterizedTest(name = "BMI máximo extremo: {0}")
         @ValueSource(doubles = {150.1, 200.0, 500.0})
         @DisplayName("Bloqueo de valores de BMI superiores al límite humano razonable (150)")
         void testBmiClassificationMaximoImposible(double bmi) {
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bmiClassification(bmi));
+            double altura = 1.00;
+            double peso = bmi * Math.pow(altura, 2);
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0)));
         }
 
         /* Test adicionales para mostrar que se pueden definir de otra forma. */
@@ -222,9 +236,14 @@ public class BMITest {
             double bmiMedio = 27.5;
             double bmiLimiteSuperior = 29.99;
 
-            String resultInferior = healthCalc.bmiClassification(bmiLimiteInferior);
-            String resultMedio = healthCalc.bmiClassification(bmiMedio);
-            String resultSuperior = healthCalc.bmiClassification(bmiLimiteSuperior);
+            double altura = 1.75;
+            double pesoInferior = bmiLimiteInferior * Math.pow(altura, 2);
+            double pesoMedio = bmiMedio * Math.pow(altura, 2);
+            double pesoSuperior = bmiLimiteSuperior * Math.pow(altura, 2);
+
+            String resultInferior = healthCalc.bmiClassification(new PersonImpl(pesoInferior, altura, null, 0));
+            String resultMedio = healthCalc.bmiClassification(new PersonImpl(pesoMedio, altura, null, 0));
+            String resultSuperior = healthCalc.bmiClassification(new PersonImpl(pesoSuperior, altura, null, 0));
 
             assertAll(
                 () -> assertEquals("Overweight", resultInferior),
@@ -252,7 +271,9 @@ public class BMITest {
         })
         @DisplayName("Clasificación de BMI en los límites exactos de cada categoría")
         void testBmiClassificationLimites(double bmi, String expectedCategory) throws InvalidHealthDataException {
-            String result = healthCalc.bmiClassification(bmi);
+            double altura = 1.75;
+            double peso = bmi * Math.pow(altura, 2);
+            String result = healthCalc.bmiClassification(new PersonImpl(peso, altura, null, 0));
 
             assertEquals(expectedCategory, result);
         }

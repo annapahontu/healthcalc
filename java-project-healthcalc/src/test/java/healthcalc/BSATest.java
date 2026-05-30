@@ -36,7 +36,7 @@ public class BSATest {
             double height = 175.0;
             double expectedBsa = Math.sqrt((weight * height) / 3600.0);
             
-            Person person = new PersonImpl(weight, height / 100.0, null, 0);
+            Person person = new PersonImpl(weight, height, null, 0);
             double result = healthCalc.bsa(person);
 
             // Compare the expected results with the results from the method used

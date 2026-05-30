@@ -41,7 +41,7 @@ public class BSASteps {
     @When("el sistema intenta calcular el BSA")
     public void el_sistema_intenta_calcular_el_bsa() {
         try {
-            Person person = new PersonImpl(this.weight, this.height / 100.0, null, 0);
+            Person person = new PersonImpl(this.weight, this.height, null, 0);
             this.result = calculator.bsa(person);
             this.exception = null;
         } catch (Exception e) {

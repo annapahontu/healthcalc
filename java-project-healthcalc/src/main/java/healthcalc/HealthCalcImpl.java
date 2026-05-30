@@ -19,7 +19,8 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public String bmiClassification(double bmi) throws InvalidHealthDataException {
+    public String bmiClassification(Person person) throws InvalidHealthDataException {
+        double bmi = bmi(person);
         // Tratamos los posibles errores
         if (bmi < 0) {
             throw new InvalidHealthDataException("BMI must be a positive value.");

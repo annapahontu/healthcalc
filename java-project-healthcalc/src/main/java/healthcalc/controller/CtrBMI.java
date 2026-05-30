@@ -100,7 +100,7 @@ public class CtrBMI implements ActionListener {
             String out = String.format("Resultado BMI: %.2f", bmi);
 
             if (vistaBMI.wantsClassification()) {
-                out += " - " + modelo.bmiClassification(bmi);
+                out += " - " + modelo.bmiClassification(person);
             }
             
             vistaBMI.setResult(out);

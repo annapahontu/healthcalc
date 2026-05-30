@@ -49,7 +49,7 @@ public class BMISteps {
         try {
             // El método bmi en HealthCalcImpl espera la altura en metros.
             // Los features la proporcionan en cm (ej: 175), por lo que dividimos entre 100.
-            Person person = new PersonImpl(this.weight, this.height / 100.0, null, 0);
+            Person person = new PersonImpl(this.weight, this.height/100.0, null, 0);
             this.bmiResult = calculator.bmi(person);
             this.exception = null;
         } catch (Exception e) {
@@ -73,7 +73,9 @@ public class BMISteps {
     @When("el sistema intenta clasificar el valor para BMI")
     public void el_sistema_intenta_clasificar_el_valor_para_bmi() {
         try {
-            this.classificationResult = calculator.bmiClassification(this.bmiResult);
+            double altura = 1.75;
+            double peso = this.bmiResult * Math.pow(altura, 2);
+            this.classificationResult = calculator.bmiClassification(new PersonImpl(peso, altura, null, 0));
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;

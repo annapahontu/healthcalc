@@ -54,7 +54,7 @@ public class IBWSteps {
     @When("ejecuto la operación de cálculo de IBW")
     public void ejecuto_operacion_IBW() {
         try {
-            Person person = new PersonImpl(0, this.height / 100.0, this.gender, 0);
+            Person person = new PersonImpl(0, this.height, this.gender, 0);
             this.result = calculator.ibw(person);
             this.exception = null;
         } catch (Exception e) {
