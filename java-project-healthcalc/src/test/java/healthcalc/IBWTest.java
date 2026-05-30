@@ -45,7 +45,8 @@ public class IBWTest {
         void testIbwHombreValido(double height, Gender gender) throws InvalidHealthDataException {
             double expectedIbw = (height - 100) - ((height - 150) / 4.0);
 
-            double result = healthCalc.ibw(height, gender);
+            Person personM = new PersonImpl(0, height, gender, 0);
+            double result = healthCalc.ibw(personM);
 
             assertEquals(expectedIbw, result, 0.01);
         }
@@ -62,7 +63,8 @@ public class IBWTest {
         void testIbwMujerValido(double height, Gender gender) throws InvalidHealthDataException {
             double expectedIbw = (height - 100) - ((height - 150) / 2.0);
 
-            double result = healthCalc.ibw(height, gender);
+            Person personF = new PersonImpl(0, height, gender, 0);
+            double result = healthCalc.ibw(personF);
 
             assertEquals(expectedIbw, result, 0.01);
         }
@@ -71,8 +73,8 @@ public class IBWTest {
         @DisplayName("Lanzar error cuando altura negativa")
         void testIbwAlturaNegativa() {
             assertAll(
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(-100.0, Gender.MALE)),
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(-100.0, Gender.FEMALE))
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(new PersonImpl(0, -100.0, Gender.MALE, 0))),
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(new PersonImpl(0, -100.0, Gender.FEMALE, 0)))
             ); 
         }
 
@@ -80,8 +82,8 @@ public class IBWTest {
         @DisplayName("Lanzar error cuando altura menor a 30 cm")
         void testIbwAlturaMenor30() {
             assertAll(
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(29.0, Gender.MALE)),
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(29.0, Gender.FEMALE))
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(new PersonImpl(0, 29.0, Gender.MALE, 0))),
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(new PersonImpl(0, 29.0, Gender.FEMALE, 0)))
             );
         } 
         
@@ -89,8 +91,8 @@ public class IBWTest {
         @DisplayName("Lanzar error cuando altura sea mayor a 300 cm")
         void testIbwAlturaMayor300() {
             assertAll(
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(301.0, Gender.MALE)),
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(301.0, Gender.FEMALE))
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(new PersonImpl(0, 301.0, Gender.MALE, 0))),
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.ibw(new PersonImpl(0, 301.0, Gender.FEMALE, 0)))
             );
         }
     }

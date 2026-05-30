@@ -18,8 +18,8 @@ public interface HealthCalc {
 	 * Overweight: 25 <= BMI < 30
 	 * Obesity: BMI >= 30
 	 *
-	 * @param bmi	Body Mass Index of the person (kg/m2).
-	 * @return	  	The BMI classification of the person.
+	 * @param bmi		The BMI value of the person.
+	 * @return	  		The BMI classification of the person.
 	 * @throws Exception
 	 */
 	public String bmiClassification(double bmi) throws InvalidHealthDataException;
@@ -27,40 +27,37 @@ public interface HealthCalc {
 	/**
 	 * Calculate the Body Mass Index (BMI) of a person with the Harris-Benedict formula:
 	 *
-	 * @param weight	Weight of the person (kg).
-	 * @param height 	Height of the person (cm).
+	 * @param person	The person for whom to calculate the BMI.
 	 * @return	  		The Body Mass Index of the person (kg/m2).
 	 * @throws Exception
 	 */
-	public double bmi(double weight, double height) throws InvalidHealthDataException;
+	public double bmi(Person person) throws InvalidHealthDataException;
 
 	/**
 =======
 	 * Calculate the Ideal Body Weight (IBM) of a person with the Lorenz formula:
 	 * 
-	 * @param height 	Height of the person (cm).
-	 * @param gender    Gender of the person ('m' for male or 'f' for female).
+	 * @param person	The person for whom to calculate the IBW.
 	 * @return	  		The Ideal Body Weight of the person (kg).
 	 * @throws Exception
 	 */
-	public double ibw(double height, Gender gender) throws InvalidHealthDataException;
+	public double ibw(Person person) throws InvalidHealthDataException;
 
 	/**
 	 * Calculate the IBW of a person using the Lorentz formula:
 	 * - For men: IBW = height (cm) - 100 - ((height (cm) - 150) / 4)
 	 * - For women: IBW = height (cm) - 100 - ((height (cm) - 150) / 2.5)
 	 * 
-	 * @param height 	Height of the person (cm).
+	 * @param person	The person for whom to calculate the IBW.
 	 * @return	  		The Ideal Body Weight of the person (kg).
 	 * @throws Exception
 	 */
 
-	public double bsa(double weight, double height) throws InvalidHealthDataException;
+	public double bsa(Person person) throws InvalidHealthDataException;
 	/**
      * Calculate the Body Surface Area (BSA) of a person using the Mosteller formula.
      * Formula: BSA (m2) = square root of ((height (cm) * weight (kg)) / 3600)
-     * * @param weight    Weight of the person (kg).
-     * @param height    Height of the person (cm).
+     * @param person	The person for whom to calculate the BSA.
      * @return          The Body Surface Area of the person (m2).
      * @throws Exception
      */

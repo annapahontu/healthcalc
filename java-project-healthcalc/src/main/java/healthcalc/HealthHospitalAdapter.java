@@ -12,8 +12,9 @@ public class HealthHospitalAdapter implements HealthHospital {
     public Tuple<Float, String> indiceMasaCorporal(float altura, int peso) {
         double pesoKg = peso / 1000.0;
         
+        Person person = new PersonImpl(pesoKg, altura, null, 0);
         // Pasamos "altura" directamente, ya que viene en metros (ej. 1.83) y bmi() espera metros.
-        double bmiResult = calculator.bmi(pesoKg, altura);
+        double bmiResult = calculator.bmi(person);
         String clasificacion = calculator.bmiClassification(bmiResult);
 
         return new Tuple<>((float) bmiResult, clasificacion);
@@ -36,8 +37,10 @@ public class HealthHospitalAdapter implements HealthHospital {
         // 2. Traducimos la altura a centímetros (esto ya lo teníamos bien)
         double alturaCm = altura * 100.0;
         
+        Person person = new PersonImpl(0, alturaCm, generoCalculadora, 0);
+
         // 3. Llamamos a la calculadora base con la letra correcta en inglés
-        double pesoIdeal = calculator.ibw(alturaCm, generoCalculadora);
+        double pesoIdeal = calculator.ibw(person);
         
         return (int) pesoIdeal;
     }

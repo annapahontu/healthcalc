@@ -2,7 +2,8 @@ package healthcalc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.HealthCalc;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewBSA;
@@ -101,7 +102,8 @@ public class CtrBSA implements ActionListener {
         
         // ============ Probamos que el resultado es posible ============
         try {
-            double bsa = modeloBSA.bsa(weight, height);
+            Person person = new PersonImpl(weight, height, null, 0);
+            double bsa = modeloBSA.bsa(person);
             String out = String.format("Resultado BSA: %.2f", bsa);
             
             vistaBSA.setResult(out);
