@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import healthcalc.Person;
 import healthcalc.PersonImpl;
 import healthcalc.Gender;
-import healthcalc.HealthCalc;
+import healthcalc.IdealBodyWeight;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ import io.cucumber.java.en.When;
 
 public class IBWSteps {
 
-    private HealthCalc calculator = HealthCalcImpl.getInstance();
+    private IdealBodyWeight calculator = HealthCalcImpl.getInstance();
     private double height;
     private Gender gender;
     private double result;
@@ -55,7 +55,7 @@ public class IBWSteps {
     public void ejecuto_operacion_IBW() {
         try {
             Person person = new PersonImpl(0, this.height, this.gender, 0);
-            this.result = calculator.ibw(person);
+            this.result = calculator.idealBodyWeight(person);
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;

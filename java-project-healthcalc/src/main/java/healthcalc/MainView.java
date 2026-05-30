@@ -15,7 +15,7 @@ import healthcalc.view.ViewIntroImpl;
 public class MainView {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            HealthCalc model = HealthCalcImpl.getInstance();
+            HealthCalcImpl model = HealthCalcImpl.getInstance();
             JFrame mainFrame = new JFrame("HealthCalc");
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.setSize(700, 500);

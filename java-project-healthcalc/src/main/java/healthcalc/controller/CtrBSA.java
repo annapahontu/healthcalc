@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import healthcalc.Person;
 import healthcalc.PersonImpl;
-import healthcalc.HealthCalc;
+import healthcalc.BodySurfaceArea;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewBSA;
 
@@ -12,10 +12,10 @@ public class CtrBSA implements ActionListener {
 
 	// El controlador guarda una referencia a su ventana y al modelo
 	private  ViewBSA vistaBSA;
-	private HealthCalc modeloBSA ;
+	private BodySurfaceArea modeloBSA ;
 
 	// La ventana y el modelo se inyectan al nacer el controlador
-	public CtrBSA( ViewBSA vista, HealthCalc modelo) {
+	public CtrBSA( ViewBSA vista, BodySurfaceArea modelo) {
 		this.vistaBSA = vista;
 		this.modeloBSA = modelo;
 
@@ -103,7 +103,7 @@ public class CtrBSA implements ActionListener {
         // ============ Probamos que el resultado es posible ============
         try {
             Person person = new PersonImpl(weight, height, null, 0);
-            double bsa = modeloBSA.bsa(person);
+            double bsa = modeloBSA.bodySurfaceArea(person);
             String out = String.format("Resultado BSA: %.2f", bsa);
             
             vistaBSA.setResult(out);
