@@ -18,11 +18,11 @@ public interface HealthCalc {
 	 * Overweight: 25 <= BMI < 30
 	 * Obesity: BMI >= 30
 	 *
-	 * @param bmi		The BMI value of the person.
+	 * @param person	The person for whom to calculate the BMI classification.
 	 * @return	  		The BMI classification of the person.
 	 * @throws Exception
 	 */
-	public String bmiClassification(double bmi) throws InvalidHealthDataException;
+	public String bmiClassification(Person person) throws InvalidHealthDataException;
 	
 	/**
 	 * Calculate the Body Mass Index (BMI) of a person with the Harris-Benedict formula:
