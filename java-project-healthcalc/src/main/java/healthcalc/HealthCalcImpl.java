@@ -36,7 +36,9 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public double bmi(double weight, double height) throws InvalidHealthDataException {
+    public double bmi(Person person) throws InvalidHealthDataException {
+        double weight = person.weight();
+        double height = person.height();
         if (weight <= 0) {
             throw new InvalidHealthDataException("Weight must be positive.");
         }
@@ -53,7 +55,9 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public double ibw(double height, Gender gender) throws InvalidHealthDataException {
+    public double ibw(Person person) throws InvalidHealthDataException {
+        double height = person.height();
+        Gender gender = person.gender();
         // Initial exception
         if (height < 30 || height > 300) {
             throw new InvalidHealthDataException("Height must be within a possible biological range [30-300] cm.");
@@ -66,7 +70,7 @@ public class HealthCalcImpl implements HealthCalc {
         } else if (gender == Gender.FEMALE){
             v_aux = 2;
         } else {
-            throw new InvalidHealthDataException("Gender must be 'MALE' or 'FEMALE'."); // Exception for non-considered gender parameters
+            throw new InvalidHealthDataException("     must be 'MALE' or 'FEMALE'."); // Exception for non-considered gender parameters
         }
 
         // Calculations of the result
@@ -75,8 +79,10 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public double bsa(double weight, double height) throws InvalidHealthDataException {
-        
+    public double bsa(Person person) throws InvalidHealthDataException {
+        double weight = person.weight();
+        double height = person.height();
+
         if (weight <= 0) {
             throw new InvalidHealthDataException("Weight must be positive.");
         }

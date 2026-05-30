@@ -2,7 +2,8 @@ package healthcalc.BDD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.en.Given;
@@ -48,7 +49,8 @@ public class BMISteps {
         try {
             // El método bmi en HealthCalcImpl espera la altura en metros.
             // Los features la proporcionan en cm (ej: 175), por lo que dividimos entre 100.
-            this.bmiResult = calculator.bmi(this.weight, this.height / 100.0);
+            Person person = new PersonImpl(this.weight, this.height / 100.0, null, 0);
+            this.bmiResult = calculator.bmi(person);
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;

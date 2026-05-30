@@ -2,7 +2,8 @@ package healthcalc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.Gender;
 import healthcalc.HealthCalc;
 import healthcalc.exceptions.InvalidHealthDataException;
@@ -75,7 +76,8 @@ public class CtrIBW implements ActionListener {
                
         // Valores fisiológicos
         try {
-        	double ibw = modeloIBW.ibw(heightCm, gender);
+        	Person person = new PersonImpl(0, heightCm, gender, 0);
+        	double ibw = modeloIBW.ibw(person);
         	vistaIBW.setResult(String.format("Resultado IBW: %.2f", ibw));
         } catch (InvalidHealthDataException ex) {
             String errorMsg = ex.getMessage().toLowerCase();

@@ -2,7 +2,8 @@ package healthcalc.BDD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.Gender;
 import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
@@ -53,7 +54,8 @@ public class IBWSteps {
     @When("ejecuto la operación de cálculo de IBW")
     public void ejecuto_operacion_IBW() {
         try {
-            this.result = calculator.ibw(this.height, this.gender);
+            Person person = new PersonImpl(0, this.height / 100.0, this.gender, 0);
+            this.result = calculator.ibw(person);
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;
