@@ -19,7 +19,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
 @DisplayName("Tests para la calculadora de salud. (BSATest)")
 
 public class BSATest {
-    private HealthCalc healthCalc;
+    private BodySurfaceArea healthCalc;
 
     @BeforeEach
     void setUp() {
