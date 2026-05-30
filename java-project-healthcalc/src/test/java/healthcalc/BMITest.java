@@ -25,7 +25,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
 
 public class BMITest {
 
-	private HealthCalc healthCalc;
+	private BasalMetabolicIndex healthCalc;
 
 	@BeforeEach
 	void setUp() {
