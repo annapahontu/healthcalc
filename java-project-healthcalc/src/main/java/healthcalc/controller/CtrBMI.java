@@ -4,15 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import healthcalc.Person;
 import healthcalc.PersonImpl;
-import healthcalc.HealthCalc;
+import healthcalc.BasalMetabolicIndex;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewBMI;
 
 public class CtrBMI implements ActionListener {
-    private HealthCalc modelo;
+    private BasalMetabolicIndex modelo;
     private ViewBMI vistaBMI;
 
-    public CtrBMI(HealthCalc modelo, ViewBMI vistaBMI) {
+    public CtrBMI(BasalMetabolicIndex modelo, ViewBMI vistaBMI) {
         this.modelo = modelo;
         this.vistaBMI = vistaBMI;
     }

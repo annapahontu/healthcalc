@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import healthcalc.Person;
 import healthcalc.PersonImpl;
 import healthcalc.BMICategory;
-import healthcalc.HealthCalc;
+import healthcalc.BasalMetabolicIndex;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -13,7 +13,7 @@ import io.cucumber.java.en.When;
 
 public class BMISteps {
 
-    private HealthCalc calculator;
+    private BasalMetabolicIndex calculator;
     private double weight;
     private double height;
     private double bmiResult;
@@ -24,7 +24,7 @@ public class BMISteps {
 
     @Given("la calculadora de salud debe estar iniciada para BMI")
     public void la_calculadora_de_salud_debe_estar_iniciada_para_BMI() {
-        HealthCalc calculator = HealthCalcImpl.getInstance();
+        BasalMetabolicIndex calculator = HealthCalcImpl.getInstance();
         this.calculator = calculator;
     }
 

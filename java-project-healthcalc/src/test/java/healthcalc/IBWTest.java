@@ -22,7 +22,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
 @DisplayName("Tests para la métrica de peso ideal IBW.")
 public class IBWTest {
 
-    private HealthCalc healthCalc;
+    private IdealBodyWeight healthCalc;
 
     @BeforeEach
     void setUp() {
