@@ -2,7 +2,7 @@ package healthcalc;
 
 public class HealthHospitalAdapter implements HealthHospital {
 
-    private HealthCalcImpl calculator;
+    private HealthCalc calculator;
 
     public HealthHospitalAdapter() {
         this.calculator = HealthCalcImpl.getInstance();

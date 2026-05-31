@@ -5,15 +5,15 @@ import java.awt.event.ActionListener;
 import healthcalc.Person;
 import healthcalc.PersonImpl;
 import healthcalc.Gender;
-import healthcalc.IdealBodyWeight;
+import healthcalc.HealthCalc;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewIBW;
 
 public class CtrIBW implements ActionListener {
-    private IdealBodyWeight modeloIBW;
+    private HealthCalc modeloIBW;
     private ViewIBW vistaIBW;
 
-    public CtrIBW(IdealBodyWeight modeloIBW, ViewIBW vistaIBW) {
+    public CtrIBW(HealthCalc modeloIBW, ViewIBW vistaIBW) {
         this.modeloIBW = modeloIBW;
         this.vistaIBW = vistaIBW;
     }

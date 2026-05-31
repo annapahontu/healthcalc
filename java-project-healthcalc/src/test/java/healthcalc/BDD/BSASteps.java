@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import healthcalc.Person;
 import healthcalc.PersonImpl;
-import healthcalc.BodySurfaceArea;
+import healthcalc.HealthCalc;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +12,7 @@ import io.cucumber.java.en.When;
 
 public class BSASteps {
 
-    private BodySurfaceArea calculator;
+    private HealthCalc calculator;
     private double weight;
     private double height;
     private double result;
@@ -20,7 +20,7 @@ public class BSASteps {
 
     @Given("la calculadora de salud está iniciada")
     public void la_calculadora_de_salud_esta_iniciada() {
-        BodySurfaceArea calculator = HealthCalcImpl.getInstance();
+        HealthCalc calculator = HealthCalcImpl.getInstance();
         this.calculator = calculator;
     }
 
