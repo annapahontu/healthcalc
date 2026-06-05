@@ -2,8 +2,10 @@ package healthcalc.BDD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import healthcalc.HealthCalc;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
+import healthcalc.Gender;
+import healthcalc.IdealBodyWeight;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,9 +13,9 @@ import io.cucumber.java.en.When;
 
 public class IBWSteps {
 
-    private HealthCalc calculator = HealthCalcImpl.getInstance();
+    private IdealBodyWeight calculator = HealthCalcImpl.getInstance();
     private double height;
-    private char gender;
+    private Gender gender;
     private double result;
     private Exception exception;
 
@@ -33,13 +35,27 @@ public class IBWSteps {
 
     @Given("el genero de la persona es {word}")
     public void el_usuario_ingresa_un_genero(String genderStr) {
-        this.gender = genderStr.toLowerCase().charAt(0);
+        if (genderStr == null || genderStr.trim().isEmpty()) {
+            this.gender = null;
+            return;
+        }
+
+        char firstChar = Character.toUpperCase(genderStr.charAt(0));
+        
+        if (firstChar == 'M' || firstChar == 'H') {
+            this.gender = Gender.MALE;     // Masculino / Hombre -> MALE
+        } else if (firstChar == 'F' || firstChar == 'W') {
+            this.gender = Gender.FEMALE;   // Femenino / Woman -> FEMALE
+        } else {
+            this.gender = null;
+        }
     }
 
     @When("ejecuto la operación de cálculo de IBW")
     public void ejecuto_operacion_IBW() {
         try {
-            this.result = calculator.ibw(this.height, this.gender);
+            Person person = new PersonImpl(0, this.height, this.gender, 0);
+            this.result = calculator.idealBodyWeight(person);
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;

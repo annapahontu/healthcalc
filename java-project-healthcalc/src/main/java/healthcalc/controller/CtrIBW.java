@@ -2,16 +2,18 @@ package healthcalc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import healthcalc.HealthCalc;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
+import healthcalc.Gender;
+import healthcalc.IdealBodyWeight;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewIBW;
 
 public class CtrIBW implements ActionListener {
-    private HealthCalc modeloIBW;
+    private IdealBodyWeight modeloIBW;
     private ViewIBW vistaIBW;
 
-    public CtrIBW(HealthCalc modeloIBW, ViewIBW vistaIBW) {
+    public CtrIBW(IdealBodyWeight modeloIBW, ViewIBW vistaIBW) {
         this.modeloIBW = modeloIBW;
         this.vistaIBW = vistaIBW;
     }
@@ -65,16 +67,17 @@ public class CtrIBW implements ActionListener {
 //=======================================================================================================================
 
         // Lectura de género
-        char gender = 'M';
+        Gender gender = Gender.MALE;
         if (!vistaIBW.isMaleSelected()) {
-        	gender = 'F';
+            gender = Gender.FEMALE;
         }
         
 //=======================================================================================================================
                
         // Valores fisiológicos
         try {
-        	double ibw = modeloIBW.ibw(heightCm, gender);
+        	Person person = new PersonImpl(0, heightCm, gender, 0);
+        	double ibw = modeloIBW.idealBodyWeight(person);
         	vistaIBW.setResult(String.format("Resultado IBW: %.2f", ibw));
         } catch (InvalidHealthDataException ex) {
             String errorMsg = ex.getMessage().toLowerCase();

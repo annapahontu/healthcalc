@@ -2,7 +2,7 @@ package healthcalc;
 
 public class HealthHospitalAdapter implements HealthHospital {
 
-    private HealthCalc calculator;
+    private HealthCalcImpl calculator;
 
     public HealthHospitalAdapter() {
         this.calculator = HealthCalcImpl.getInstance();
@@ -12,32 +12,35 @@ public class HealthHospitalAdapter implements HealthHospital {
     public Tuple<Float, String> indiceMasaCorporal(float altura, int peso) {
         double pesoKg = peso / 1000.0;
         
+        Person person = new PersonImpl(pesoKg, altura, null, 0);
         // Pasamos "altura" directamente, ya que viene en metros (ej. 1.83) y bmi() espera metros.
-        double bmiResult = calculator.bmi(pesoKg, altura);
-        String clasificacion = calculator.bmiClassification(bmiResult);
+        double bmiResult = calculator.basalMetabolicIndex(person);
+        BMICategory clasificacion = calculator.category(person);
 
-        return new Tuple<>((float) bmiResult, clasificacion);
+        return new Tuple<>((float) bmiResult, clasificacion.getLabel());
     }
 
     @Override
     public int pesoCorporalIdeal(char genero, float altura) {
-        // 1. Traducimos el género del Hospital (Español) a la Calculadora (Inglés)
-        char generoCalculadora;
+        // 1. Traducimos el género del Hospital (char en español) al Enum de la calculadora
+        Gender generoCalculadora;
         char g = Character.toUpperCase(genero);
-        
-        if (g == 'H') {
-            generoCalculadora = 'M'; // Hombre -> Male
-        } else if (g == 'M') {
-            generoCalculadora = 'F'; // Mujer -> Female
+    
+        if (g == 'M') {
+            generoCalculadora = Gender.MALE; 
+        } else if (g == 'F') {
+            generoCalculadora = Gender.FEMALE;
         } else {
-            generoCalculadora = genero; // Por si acaso
+            throw new IllegalArgumentException("Género recibido del hospital no válido: " + genero);
         }
 
         // 2. Traducimos la altura a centímetros (esto ya lo teníamos bien)
         double alturaCm = altura * 100.0;
         
+        Person person = new PersonImpl(0, alturaCm, generoCalculadora, 0);
+
         // 3. Llamamos a la calculadora base con la letra correcta en inglés
-        double pesoIdeal = calculator.ibw(alturaCm, generoCalculadora);
+        double pesoIdeal = calculator.idealBodyWeight(person);
         
         return (int) pesoIdeal;
     }

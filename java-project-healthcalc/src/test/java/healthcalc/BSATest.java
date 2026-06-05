@@ -19,7 +19,7 @@ import healthcalc.exceptions.InvalidHealthDataException;
 @DisplayName("Tests para la calculadora de salud. (BSATest)")
 
 public class BSATest {
-    private HealthCalc healthCalc;
+    private BodySurfaceArea healthCalc;
 
     @BeforeEach
     void setUp() {
@@ -36,7 +36,8 @@ public class BSATest {
             double height = 175.0;
             double expectedBsa = Math.sqrt((weight * height) / 3600.0);
             
-            double result = healthCalc.bsa(weight, height);
+            Person person = new PersonImpl(weight, height, null, 0);
+            double result = healthCalc.bodySurfaceArea(person);
 
             // Compare the expected results with the results from the method used
             assertEquals(expectedBsa, result, 0.01);
@@ -45,21 +46,21 @@ public class BSATest {
         @Test
         @DisplayName("Lanzar excepción cuando el peso es cero")
         void testBsaPesoCero() {
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(0, 170));
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(0, 170, null, 0)));
         }
 
         @Test
         @DisplayName("Lanzar excepción cuando la altura es cero")
         void testBsaAlturaCero() {
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(70, 0));
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(70, 0, null, 0)));
         }
 
         @Test
         @DisplayName("Lanzar excepción cuando los valores son negativos")
         void testBsaNegativos() {
             assertAll(
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(-70, 170)),
-                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(70, -170))
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(-70, 170, null, 0))),
+                () -> assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(70, -170, null, 0)))
             );
         }
 
@@ -68,7 +69,7 @@ public class BSATest {
         @DisplayName("Bloqueo de pesos inferiores al límite biológico mínimo (1 kg)")
         void testPesoMinimoImposible(double weight) {
             double height = 170.0;
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(weight, height));
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(weight, height, null, 0)));
         }
 
         @ParameterizedTest(name = "Peso máximo fuera de rango: {0} kg")
@@ -76,7 +77,7 @@ public class BSATest {
         @DisplayName("Bloqueo de pesos superiores al límite biológico máximo (700 kg)")
         void testPesoMaximoImposible(double weight) {
             double height = 170.0;   
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(weight, height));
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(weight, height, null, 0)));
         }
 
         @ParameterizedTest(name = "Altura mínima inválida: {0} cm")
@@ -85,7 +86,7 @@ public class BSATest {
         void testAlturaMinimaImposible(double height) {
             double weight = 70.0;
             
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(weight, height));
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(weight, height, null, 0)));
         }
 
         @ParameterizedTest(name = "Altura máxima inválida: {0} cm")
@@ -94,7 +95,7 @@ public class BSATest {
         void testAlturaMaximoImposible(double height) {
             double weight = 70.0;
             
-            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bsa(weight, height));
+            assertThrows(InvalidHealthDataException.class, () -> healthCalc.bodySurfaceArea(new PersonImpl(weight, height, null, 0)));
         }
     }
 

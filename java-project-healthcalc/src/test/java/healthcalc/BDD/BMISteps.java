@@ -2,8 +2,10 @@ package healthcalc.BDD;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import healthcalc.HealthCalc;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
+import healthcalc.BMICategory;
+import healthcalc.BasalMetabolicIndex;
 import healthcalc.HealthCalcImpl;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,18 +13,18 @@ import io.cucumber.java.en.When;
 
 public class BMISteps {
 
-    private HealthCalc calculator;
+    private BasalMetabolicIndex calculator;
     private double weight;
     private double height;
     private double bmiResult;
-    private String classificationResult;
+    private BMICategory classificationResult;
     private Exception exception;
 
     // --- BACKGROUND  ---
 
     @Given("la calculadora de salud debe estar iniciada para BMI")
     public void la_calculadora_de_salud_debe_estar_iniciada_para_BMI() {
-        HealthCalc calculator = HealthCalcImpl.getInstance();
+        BasalMetabolicIndex calculator = HealthCalcImpl.getInstance();
         this.calculator = calculator;
     }
 
@@ -48,7 +50,8 @@ public class BMISteps {
         try {
             // El método bmi en HealthCalcImpl espera la altura en metros.
             // Los features la proporcionan en cm (ej: 175), por lo que dividimos entre 100.
-            this.bmiResult = calculator.bmi(this.weight, this.height / 100.0);
+            Person person = new PersonImpl(this.weight, this.height/100.0, null, 0);
+            this.bmiResult = calculator.basalMetabolicIndex(person);
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;
@@ -71,7 +74,9 @@ public class BMISteps {
     @When("el sistema intenta clasificar el valor para BMI")
     public void el_sistema_intenta_clasificar_el_valor_para_bmi() {
         try {
-            this.classificationResult = calculator.bmiClassification(this.bmiResult);
+            double altura = 1.75;
+            double peso = this.bmiResult * Math.pow(altura, 2);
+            this.classificationResult = calculator.category(new PersonImpl(peso, altura, null, 0));
             this.exception = null;
         } catch (Exception e) {
             this.exception = e;
@@ -80,7 +85,7 @@ public class BMISteps {
 
     @Then("el resultado debe ser {string}")
     public void el_resultado_debe_ser(String expected) {
-        assertEquals(expected, this.classificationResult);
+        assertEquals(expected, this.classificationResult.getLabel());
     }
 
     // --- MANEJO DE EXCEPCIONES ---

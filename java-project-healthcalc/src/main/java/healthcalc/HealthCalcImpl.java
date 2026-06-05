@@ -2,7 +2,7 @@ package healthcalc;
 
 import healthcalc.exceptions.InvalidHealthDataException;
 
-public class HealthCalcImpl implements HealthCalc {
+public class HealthCalcImpl implements BasalMetabolicIndex, IdealBodyWeight, BodySurfaceArea {
 
     // Realizar Singleton
     private static HealthCalcImpl instance;
@@ -19,42 +19,27 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public String bmiClassification(double bmi) throws InvalidHealthDataException {
+    public BMICategory category(Person person) throws InvalidHealthDataException {
+        double bmi = basalMetabolicIndex(person);
+        // Tratamos los posibles errores
         if (bmi < 0) {
-            throw new InvalidHealthDataException("BMI cannot be negative.");
+            throw new InvalidHealthDataException("BMI must be a positive value.");
         }
         if (bmi > 150) {
             throw new InvalidHealthDataException("BMI must be within a possible biological range [0-150].");
         }
-        String result = "Obesity";
-        // if (bmi < 18.5) {
-        //     result = "Underweight";
-        // } else if (bmi >= 18.5 && bmi < 25) {
-        //     result = "Normal weight";
-        // } else if (bmi >= 25 && bmi < 30) {
-        //     result = "Overweight";
-        // }
-        if (bmi < 16) {
-            result = "Severe thinness";
-        } else if (bmi < 17) {
-            result = "Moderate thinness";
-        } else if (bmi < 18.5) {
-            result = "Mild thinness";
-        } else if (bmi < 25) {
-            result = "Normal weight";
-        } else if (bmi < 30) {
-            result = "Overweight";
-        } else if (bmi < 35) {
-            result = "Obese Class I";
-        } else if (bmi < 40) {
-            result = "Obese Class II";
-        } else {
-            result = "Obese Class III";}
-        return result;  
+        for (BMICategory category : BMICategory.values()) {
+            if (bmi >= category.getMinBMI() && bmi < category.getMaxBMI()) {
+                return category;
+            }
+        }
+        throw new InvalidHealthDataException("BMI value is out of any defined category range.");
     }
 
     @Override
-    public double bmi(double weight, double height) throws InvalidHealthDataException {
+    public float basalMetabolicIndex(Person person) throws InvalidHealthDataException {
+        double weight = person.weight();
+        double height = person.height();
         if (weight <= 0) {
             throw new InvalidHealthDataException("Weight must be positive.");
         }
@@ -67,11 +52,13 @@ public class HealthCalcImpl implements HealthCalc {
         if (height < 0.30 || height > 3.00) {
             throw new InvalidHealthDataException("Height must be within a possible biological range [0.30-3.00] m.");
         }
-        return weight / Math.pow(height, 2);
+        return (float) (weight / Math.pow(height, 2));
     }
 
     @Override
-    public double ibw(double height, char gender) throws InvalidHealthDataException {
+    public float idealBodyWeight(Person person) throws InvalidHealthDataException {
+        double height = person.height();
+        Gender gender = person.gender();
         // Initial exception
         if (height < 30 || height > 300) {
             throw new InvalidHealthDataException("Height must be within a possible biological range [30-300] cm.");
@@ -79,22 +66,24 @@ public class HealthCalcImpl implements HealthCalc {
         
         // Management of the gender parameter
         double v_aux = -1;
-        if (Character.toUpperCase(gender)== 'M'){
+        if (gender == Gender.MALE){
             v_aux = 4;
-        } else if (Character.toUpperCase(gender) == 'F'){
+        } else if (gender == Gender.FEMALE){
             v_aux = 2;
         } else {
-            throw new InvalidHealthDataException("Gender must be 'm' or 'f'."); // Exception for non-considered gender parameters
+            throw new InvalidHealthDataException("     must be 'MALE' or 'FEMALE'."); // Exception for non-considered gender parameters
         }
 
         // Calculations of the result
         double ibw = (height - 100) - ((height-150)/v_aux);
-        return ibw;
+        return (float) ibw;
     }
 
     @Override
-    public double bsa(double weight, double height) throws InvalidHealthDataException {
-        
+    public float bodySurfaceArea(Person person) throws InvalidHealthDataException {
+        double weight = person.weight();
+        double height = person.height();
+
         if (weight <= 0) {
             throw new InvalidHealthDataException("Weight must be positive.");
         }
@@ -109,7 +98,7 @@ public class HealthCalcImpl implements HealthCalc {
         }
 
 
-        return Math.sqrt((height * weight) / 3600.0);
+        return (float) Math.sqrt((height * weight) / 3600.0);
     }
 
 }
