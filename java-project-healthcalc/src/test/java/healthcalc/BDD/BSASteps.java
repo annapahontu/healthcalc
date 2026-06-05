@@ -19,7 +19,8 @@ public class BSASteps {
 
     @Given("la calculadora de salud está iniciada")
     public void la_calculadora_de_salud_esta_iniciada() {
-        calculator = new HealthCalcImpl();
+        HealthCalc calculator = HealthCalcImpl.getInstance();
+        this.calculator = calculator;
     }
 
     @Given("el usuario ha seleccionado la métrica BSA para calcular")

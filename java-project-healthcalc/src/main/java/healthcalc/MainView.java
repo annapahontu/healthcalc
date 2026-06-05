@@ -1,22 +1,21 @@
 package healthcalc;
 
 import javax.swing.JFrame;
-
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
 import healthcalc.controller.CtrBMI;
 import healthcalc.controller.CtrBSA;
 import healthcalc.controller.CtrIBW;
-import healthcalc.view.ViewIntroImpl;
 import healthcalc.view.ViewBMIImpl;
 import healthcalc.view.ViewBSAImpl;
 import healthcalc.view.ViewIBWImpl;
+import healthcalc.view.ViewIntroImpl;
 
 public class MainView {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            HealthCalc model = new HealthCalcImpl();
+            HealthCalc model = HealthCalcImpl.getInstance();
             JFrame mainFrame = new JFrame("HealthCalc");
             mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             mainFrame.setSize(700, 500);
