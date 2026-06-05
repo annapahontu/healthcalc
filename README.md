@@ -350,6 +350,15 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
     *  Clasificación de valores de BMI en los límites de las categorías.
     *  Intento de clasificación con un valor de BMI inválido. 
 
+## Interfaz Gráfica de Usuario
+
+Capturas de pantalla de las vistas de la HealthCalc:
+
+- Visualizado de la pestaña introductoria: [Introducción](doc/GUI/introduccion.png)
+- Visualizado de la pestaña BMI: [BMI](doc/GUI/bmi.png)
+- Visualizado de la pestaña IBW: [IBW](doc/GUI/ibw.png)
+- Visualizado de la pestaña BSA: [BSA](doc/GUI/bsa.png)
+
 ## Instalación y ejecución
 
 <details>
