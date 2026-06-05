@@ -1,0 +1,27 @@
+CASO DE USO: Calcular IBW
+ID: CU-02
+ACTOR PRINCIPAL: Usuario
+ÁMBITO: Health Calculator
+NIVEL: Objetivo de usuario
+DESCRIPCIÓN: El usuario desea calcular su Peso Corporal Ideal (PCI) utilizando la Health Calculator. El sistema pregunta por la medida a calcular, y el usuario selecciona la medida de IBW. El sistema muestra el resultado con los datos del usuario.
+
+INTERESADOS:
+ - El usuario: quiere saber el valor correspondiente a su peso corporal ideal.
+
+PRECONDICIONES:
+ - El usuario se encuentra en el menú principal de métricas.
+
+DISPARADOR: El usuario selecciona la opción de calcular la métrica IBW.
+
+GARANTÍA DE ÉXITO: El sistema calcula correctamente el peso corporal ideal para los datos introducidos mediante la fórmula de Lorentz y muestra el resultado al usuario.
+
+GARANTÍA MÍNIMA: Regresa al menú principal.
+
+ESCENARIO PRINCIPAL DE ÉXITO: 
+ 1 El usuario selecciona la métrica IBW.
+ 2 El usuario ingresa los datos antropométricos: género y altura (CU-04).
+ 3 El sistema calcula IBW mediante la fórmula de Lorentz.
+ 4 El sistema muestra al usuario el resultado calculado.
+
+EXTENSIONES:
+ 2a Los datos introducidos están incompletos: El sistema informa del error y vuelve al caso de uso “Introducir datos” o “Editar datos”. 

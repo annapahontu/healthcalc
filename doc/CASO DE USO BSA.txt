@@ -1,0 +1,27 @@
+CASO DE USO: Calcular BSA (Área de Superficie corporal)
+ID: CU-03
+ACTOR PRINCIPAL: Usuario
+ÁMBITO: Health Calculator
+NIVEL: Objetivo de usuario
+DESCRIPCIÓN: El usuario quiere calcular el BSA a partir de los parámetros. El usuario debe elegir qué métrica quiere calcular. Una vez selecciona la métrica BSA, ingresa los datos requeridos. El sistema usará los datos del usuario para calcular el BSA y mostrará los resultados al usuario.
+
+INTERESADOS: 
+El usuario: Quiere conocer su área de superficie corporal para tener información sobre su estado de salud.
+
+PRECONDICIONES:
+El usuario se encuentra en el menú principal de métricas.
+
+DISPARADOR: El usuario selecciona la opción de calcular la métrica BSA en la calculadora.
+
+GARANTÍA DE ÉXITO: El sistema calcula correctamente el BSA mediante la fórmula de Mosteller y muestra el resultado al usuario.
+
+GARANTÍA MÍNIMA: Regresa al menú.
+
+ESCENARIO PRINCIPAL DE ÉXITO:
+El usuario selecciona la métrica BSA.
+El usuario ingresa los datos antropométricos: peso y altura (CU-04).
+El sistema calcula el BSA aplicando la fórmula de Mosteller.
+El sistema muestra al usuario el valor numérico del BSA calculado.
+
+EXTENSIONES:
+ Los datos introducidos están incompletos y el sistema muestra un error. Vuelve al caso de uso “Introducir datos” o “Editar datos”. 

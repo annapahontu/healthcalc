@@ -1,0 +1,29 @@
+CASO DE USO: Calcular BMI
+ID: CU-01
+
+ACTOR PRINCIPAL: Usuario
+ÁMBITO: Health Calculator
+NIVEL: Objetivo de usuario
+DESCRIPCIÓN: El usuario quiere calcular el BMI a partir de los parámetros. El usuario debe elegir qué métrica quiere calcular. Una vez selecciona la métrica BMI, ingresa los datos requeridos. El sistema usará los datos del usuario para calcular el BMI y mostrará los datos al usuario.
+
+INTERESADOS: 
+El usuario: Quiere conocer su BMI para obtener información sobre su estado físico.
+
+PRECONDICIONES:
+El usuario se encuentra en el menú principal de métricas
+
+DISPARADOR: El usuario elige calcular la métrica BMI.
+
+GARANTÍA DE ÉXITO: El sistema calcula correctamente el BMI y muestra el resultado al usuario.
+
+GARANTÍA MÍNIMA: Regresa al menú.
+
+ESCENARIO PRINCIPAL DE ÉXITO:
+1. El usuario selecciona la métrica BMI.
+2. El usuario ingresa los datos antropométricos: peso y altura (CU-04).
+3. El sistema calcula el BMI con los datos aportados por el usuario.
+4. El sistema muestra el resultado calculado.
+
+EXTENSIONES:
+ 2a. Los datos introducidos están incompletos y el sistema muestra un error. Vuelve al caso de uso “Introducir datos” o “Editar datos”. 
+ 4a. Se muestra la opción de enseñar la clasificación del BMI. 
