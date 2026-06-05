@@ -289,6 +289,67 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 </details>
 
+## Behaviour Driven Development
+
+<u>Historia de usuario 1</u>: [Cálculo del IBW](<java-project-healthcalc/src/test/Resources/healthcalc/IBW.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular El Ideal Body Weight (IBW) de una persona basándome en su altura y género 
+
+**Para** obtener información de mi salud.
+
+<u>*Scenarios*</u>:
+
+    *  Verificar cálculos exitosos estándar.
+    *  Cálculo del IBW en los límites biológicos.
+    *  Intento de cálculo con altura inválida.
+    *  Intento de cálculo con género inválido.
+
+<u>Historia de usuario 2</u>: [Cálculo del BSA](<java-project-healthcalc/src/test/Resources/healthcalc/BSA.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular mi Área de Superficie Corporal (BSA) a partir de mi peso y altura 
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Verificación de cálculos exitosos estándar.
+    *  Cálculo del BSA en los límites biológicos permitidos.
+    *  Intento de cálculo con peso inválido o fuera de rango.
+    *  Intento de cálculo con altura inválida o fuera de rango.
+
+<u>Historia de usuario 3</u>: [Cálculo del BMI](<java-project-healthcalc/src/test/Resources/healthcalc/BMI.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular mi Índice de Masa Corporal (BMI) a partir de mi peso y altura
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Verificación de cálculos exitosos estándar.
+    *  Cálculo del BMI en los límites biológicos permitidos.
+    *  Intento de cálculo con peso inválido o fuera de rango.
+    *  Intento de cálculo con altura inválida o fuera de rango.
+
+<u>Historia de usuario 4</u>: [Clasificación resultado BMI](<java-project-healthcalc/src/test/Resources/healthcalc/Clasificacion.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** que el sistema clasifique mi Índice de Masa Corporal (BMI) 
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Clasificación exitosa de los rangos de peso.
+    *  Clasificación de valores de BMI en los límites de las categorías.
+    *  Intento de clasificación con un valor de BMI inválido. 
+
 ## Instalación y ejecución
 
 <details>
