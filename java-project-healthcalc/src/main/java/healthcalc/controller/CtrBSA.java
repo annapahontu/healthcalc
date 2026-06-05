@@ -3,7 +3,9 @@ package healthcalc.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import healthcalc.HealthCalc;
+import healthcalc.BodySurfaceArea;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewBSA;
 
@@ -11,10 +13,10 @@ public class CtrBSA implements ActionListener {
 
 	// El controlador guarda una referencia a su ventana y al modelo
 	private  ViewBSA vistaBSA;
-	private HealthCalc modeloBSA ;
+	private BodySurfaceArea modeloBSA ;
 
 	// La ventana y el modelo se inyectan al nacer el controlador
-	public CtrBSA( ViewBSA vista, HealthCalc modelo) {
+	public CtrBSA( ViewBSA vista, BodySurfaceArea modelo) {
 		this.vistaBSA = vista;
 		this.modeloBSA = modelo;
 
@@ -61,7 +63,13 @@ public class CtrBSA implements ActionListener {
             vistaBSA.setHeightError("Error: Sólo puede introduzcir solo números.");
             // ============ Vemos si tiene , ============
             if (w.contains(",")) {
-                vistaBSA.setWeightError("Error: Use '.' en lugar de ',' para decimales.");
+                vistaBSA.setWeightError("Error: Usa '.' en lugar de ',' para decimales.");
+                err = true;
+            }
+            err = true;
+            
+            if (h.contains(",")) {
+                vistaBSA.setHeightError("Error: Usa '.' en lugar de ',' para decimales.");
                 err = true;
             }
             err = true;
@@ -95,7 +103,8 @@ public class CtrBSA implements ActionListener {
         
         // ============ Probamos que el resultado es posible ============
         try {
-            double bsa = modeloBSA.bsa(weight, height);
+            Person person = new PersonImpl(weight, height, null, 0);
+            double bsa = modeloBSA.bodySurfaceArea(person);
             String out = String.format("Resultado BSA: %.2f", bsa);
             
             vistaBSA.setResult(out);

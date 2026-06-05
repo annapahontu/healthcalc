@@ -2,16 +2,17 @@ package healthcalc.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import healthcalc.HealthCalc;
+import healthcalc.Person;
+import healthcalc.PersonImpl;
+import healthcalc.BasalMetabolicIndex;
 import healthcalc.exceptions.InvalidHealthDataException;
 import healthcalc.view.ViewBMI;
 
 public class CtrBMI implements ActionListener {
-    private HealthCalc modelo;
+    private BasalMetabolicIndex modelo;
     private ViewBMI vistaBMI;
 
-    public CtrBMI(HealthCalc modelo, ViewBMI vistaBMI) {
+    public CtrBMI(BasalMetabolicIndex modelo, ViewBMI vistaBMI) {
         this.modelo = modelo;
         this.vistaBMI = vistaBMI;
     }
@@ -94,11 +95,12 @@ public class CtrBMI implements ActionListener {
         // Valores fisiológicos
         
         try {
-            double bmi = modelo.bmi(weight, heightCm / 100.0);
+            Person person = new PersonImpl(weight, heightCm / 100.0, null, 0);
+            double bmi = modelo.basalMetabolicIndex(person);
             String out = String.format("Resultado BMI: %.2f", bmi);
 
             if (vistaBMI.wantsClassification()) {
-                out += " - " + modelo.bmiClassification(bmi);
+                out += " - " + modelo.category(person);
             }
             
             vistaBMI.setResult(out);

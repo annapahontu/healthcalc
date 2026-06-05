@@ -289,6 +289,168 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 
 </details>
 
+## Behaviour Driven Development
+
+<u>Historia de usuario 1</u>: [Cálculo del IBW](<java-project-healthcalc/src/test/Resources/healthcalc/IBW.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular El Ideal Body Weight (IBW) de una persona basándome en su altura y género 
+
+**Para** obtener información de mi salud.
+
+<u>*Scenarios*</u>:
+
+    *  Verificar cálculos exitosos estándar.
+    *  Cálculo del IBW en los límites biológicos.
+    *  Intento de cálculo con altura inválida.
+    *  Intento de cálculo con género inválido.
+
+<u>Historia de usuario 2</u>: [Cálculo del BSA](<java-project-healthcalc/src/test/Resources/healthcalc/BSA.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular mi Área de Superficie Corporal (BSA) a partir de mi peso y altura 
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Verificación de cálculos exitosos estándar.
+    *  Cálculo del BSA en los límites biológicos permitidos.
+    *  Intento de cálculo con peso inválido o fuera de rango.
+    *  Intento de cálculo con altura inválida o fuera de rango.
+
+<u>Historia de usuario 3</u>: [Cálculo del BMI](<java-project-healthcalc/src/test/Resources/healthcalc/BMI.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** calcular mi Índice de Masa Corporal (BMI) a partir de mi peso y altura
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Verificación de cálculos exitosos estándar.
+    *  Cálculo del BMI en los límites biológicos permitidos.
+    *  Intento de cálculo con peso inválido o fuera de rango.
+    *  Intento de cálculo con altura inválida o fuera de rango.
+
+<u>Historia de usuario 4</u>: [Clasificación resultado BMI](<java-project-healthcalc/src/test/Resources/healthcalc/Clasificacion.feature>). 
+
+**Como** usuario de la aplicación HealthCalc
+
+**Quiero** que el sistema clasifique mi Índice de Masa Corporal (BMI) 
+
+**Para** obtener información clínica precisa sobre mi estado de salud
+
+<u>*Scenarios*</u>:
+
+    *  Clasificación exitosa de los rangos de peso.
+    *  Clasificación de valores de BMI en los límites de las categorías.
+    *  Intento de clasificación con un valor de BMI inválido. 
+
+## Interfaz Gráfica de Usuario
+
+Capturas de pantalla de las vistas de la HealthCalc:
+
+- Visualizado de la pestaña introductoria: [Introducción](doc/GUI/introduccion.png)
+- Visualizado de la pestaña BMI: [BMI](doc/GUI/bmi.png)
+- Visualizado de la pestaña IBW: [IBW](doc/GUI/ibw.png)
+- Visualizado de la pestaña BSA: [BSA](doc/GUI/bsa.png)
+
+## Práctica 6: Patrones de diseño
+
+### 1. Patrón Singleton
+Para garantizar que toda la aplicación y sus diferentes componentes utilicen la misma y única instancia de la calculadora, hemos aplicado el patrón **Singleton**. 
+
+* **Diagrama UML:**
+
+![Diagrama UML Singleton](design_patterns/Singleton_UML.png)
+
+---
+
+### 2. Patrón Adapter
+El sistema informático del hospital requería usar la interfaz `HealthHospital`, la cual maneja unidades diferentes (gramos en lugar de kilogramos) y nombres de métodos distintos. Se ha aplicado el patrón **Adapter**.
+
+* **Diagrama UML:**
+![Diagrama UML Adapter](design_patterns/Adapter_UML.png)
+
+---
+
+### 3. Patrón Proxy
+Para llevar un registro de las veces que se utiliza la calculadora y poder extraer estadísticas, hemos implementado el patrón **Proxy**.
+
+* **Diagrama UML:**
+![Diagrama UML Proxy](design_patterns/Proxy_UML.png)
+
+---
+
+### 4. Patrón Decorator
+El hospital recibe pacientes internacionales, por lo que requerían dos versiones de la calculadora (Europea y Americana) y mostrar mensajes bilingües (Español e Inglés) por pantalla. Para ello, se ha usado el patrón **Decorator**.
+
+* **Diagrama UML:**
+![Diagrama UML Decorator](design_patterns/Decorator_UML.png)
+
+## Práctica 7: Refactorings
+
+### Refactoring: Implementar Gender enum
+
+* **(1) Bad smell:** Primitive Obsession. El género del paciente se gestionaba en toda la aplicación mediante el tipo primitivo `char` (como `'m'`, `'f'`, `'H'`, `'M'`). Esto daba la posibilidad de introducir estados inválidos en tiempo de ejecución y obligaba al sistema a realizar validaciones manuales redundantes.
+* **(2) Refactorings aplicados:** Replace Type Code with Class/Enum. Sustituir el uso de caracteres sueltos por un enum con datos propios (`MALE`/`FEMALE`).
+* **(3) Tipo/categoría:** Class refactoring.
+* **(4) Descripción:** Se ha creado el enum `Gender` en el proyecto con las constantes `MALE` y `FEMALE`. Cambiamos la calculadora para que ahora pida obligatoriamente una de estas dos opciones en lugar de una letra en el método de cálculo de la interfaz `HealthCalc` y su implementación `HealthCalcImpl`. Como el compilador ahora no deja que nadie se equivoque de letra al programar, borramos las pruebas (tests) antiguas que revisaban si se metían letras raras porque ya no hacen falta. Por ejemplo, se ha eliminado el código muerto (*Dead Code*) de las pruebas unitarias (`IBWTest`) que se encargaba de validar caracteres erróneos. El controlador de la interfaz gráfica (`CtrIBW`) y los Step Definitions de Cucumber (`IBWSteps`) se han adaptado para mapear de forma limpia las interacciones y textos del usuario hacia las constantes del enum.
+* **(5) Cambios manuales:** Creamos 1 archivo nuevo (`Gender.java`). Modificamos a mano 6 archivos para cambiar las letras por la nueva lista y borrar las comprobaciones que ya no sirven (`HealthCalc.java`, `HealthCalcImpl.java`, `HealthHospitalAdapter.java`, `CtrIBW.java`, `IBWTest.java` e `IBWSteps.java`).
+
+---
+
+### Refactoring: Implementar BMICategory enum
+
+* **(1) Bad smell:** Primitive Obsession / Magic Strings. Las categorías BMI se representaban como cadenas de texto en el código, sin una clase que las agrupe.
+* **(2) Refactorings aplicados:** Replace Type Code with Class/Enum. Sustituir los strings por un enum con datos propios.
+* **(3) Tipo/categoría:** Class refactoring.
+* **(4) Descripción:** Se ha editado el enum `BMICategory` añadiendo a cada constante su etiqueta de texto, su valor mínimo y su valor máximo de BMI. Se han añadido los métodos `getLabel()`, `getMinBMI()` y `getMaxBMI()`. El método `bmiClassification` de `HealthCalcImpl` elimina su cadena if-else y delega la clasificación al propio enum iterando sus valores.
+* **(5) Cambios manuales:** 2 ficheros modificados: `BMICategory.java` (donde se añaden campos, constructor y métodos) y `HealthCalcImpl.java`.
+
+---
+
+### Refactoring: Implementar interfaz Persona
+
+* **(1) Bad smell:** Long Parameter List. El método recibe muchos parámetros sueltos (peso, altura, género) que están relacionados entre ellos.
+* **(2) Refactorings aplicados:** Introduce Parameter Object. Se sustituyen los parámetros individuales por un objeto que los agrupa.
+* **(3) Tipo/categoría:** Method refactoring.
+* **(4) Descripción:** Se han creado la interfaz `Person` y la clase `PersonImpl` para recopilar la información del paciente. Se han añadido los métodos `weight()`, `height()`, `gender()` y `age()`, que devuelven los valores de los parámetros respectivos.
+* **(5) Cambios manuales:** Creación de 2 clases nuevas (`Person.java` y `PersonImpl.java`). Modificación de 11 clases entre entornos de Test, Steps, Controllers, `HealthCalc` y `HealthCalcImpl`.
+
+---
+
+### Refactoring: Rename Methods
+
+* **(1) Bad smell:** Nombre poco representativo (*non-descriptive method names*). Los métodos `bmi`, `bmiClassification`, `ibw` y `bsa` usaban siglas o abreviaturas que no expresaban claramente la métrica que calculan.
+* **(2) Refactoring aplicado:** Rename Method.
+* **(3) Tipo/categoría:** Method refactoring.
+* **(4) Descripción del cambio:** Se han renombrado los métodos de la interfaz `HealthCalc` y su implementación usando la propiedad de refactor de VS Code:
+  * En `HealthCalcImpl`: `bmi` -> `basalMetabolicIndex`.
+  * `bmiClassification` -> `category`.
+  * `ibw` -> `idealBodyWeight`.
+  * `bsa` -> `bodySurfaceArea`.
+  
+  Se propagó automáticamente el cambio a todos los ficheros que referenciaban dichos métodos (controladores, adaptador, tests unitarios y BDD).
+* **(5) Cambios manuales:** Hemos cambiado solo en la interfaz `HealthCalc` de forma manual y lo hemos propagado a todas las clases. Solo se ha modificado el tipo de datos de salida y el nombre del método.
+
+---
+
+### Refactoring: Extract Interface (God Class)
+
+* **(1) Bad smell:** Clase Dios (*God Class*). La interfaz `HealthCalc` concentraba responsabilidades de tres métricas distintas (BMI, IBW, BSA) en una única clase, violando el principio de responsabilidad única (SRP). Cualquier clase que quisiera usar solo una métrica dependía de toda la interfaz.
+* **(2) Refactoring aplicado:** Extract Interface. Se extrajeron tres interfaces especializadas a partir de `HealthCalc`, una por cada métrica de salud:
+  * `BasalMetabolicIndex`: `basalMetabolicIndex()` y `category()`
+  * `IdealBodyWeight`: `idealBodyWeight()`
+  * `BodySurfaceArea`: `bodySurfaceArea()`
+* **(3) Tipo / Categoría:** Class refactoring.
+* **(4) Descripción del cambio:** Se crearon tres nuevas interfaces en el paquete `healthcalc`, cada una con responsabilidad única sobre una métrica. `HealthCalcImpl` pasó a implementar las tres interfaces nuevas. Esto permite que los clientes dependan solo de la interfaz que necesitan en lugar de la interfaz completa.
+* **(5) Cambios manuales:** 3 nuevos ficheros de interfaz creados (`BasalMetabolicIndex.java`, `IdealBodyWeight.java`, `BodySurfaceArea.java`) + 1 línea modificada en `HealthCalcImpl` (declaración implements), más la adaptación del adaptador, tests, BDD, controladores y demás dependientes de esa clase.
+
 ## Instalación y ejecución
 
 <details>
@@ -340,3 +502,13 @@ Para cada categoría, probamos valores que están justo en el límite para asegu
 - Ejecutar los tests con informe de cobertura (previamente configurado en pom.xml): `mvn test`
 
 </details>
+
+## Especificación
+
+### Casos de Uso
+![Diagrama de Casos de Uso](doc/casosDeUso_healthCalc.drawio.png)
+
+* [CU-01: Calcular BMI](<doc/CASO DE USO BMI.txt>)
+* [CU-02: Calcular BSA](<doc/CASO DE USO BSA.txt>)
+* [CU-03: Calcular IBW](<doc/CASO DE USO IBW.txt>)
+* [CU-04: Introducir datos](<doc/CASO DE USO Introducir datos.txt>)

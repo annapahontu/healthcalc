@@ -2,6 +2,8 @@ package healthcalc.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,8 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.Dimension;
-import java.awt.Font;
 
 public class ViewBSAImpl extends JPanel implements ViewBSA {
 	/**
@@ -55,15 +55,13 @@ public class ViewBSAImpl extends JPanel implements ViewBSA {
 		// ---------------------------------------------------------------------
 		
 		// ------------ Etiqueta ALTURA ----------
-		JLabel label_altura = new JLabel("Altura (cm):");
-		label_altura.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		label_altura.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_altura = new GridBagConstraints();
-		gbc_label_altura.anchor = GridBagConstraints.EAST;
-		gbc_label_altura.insets = new Insets(0, 0, 5, 5);
-		gbc_label_altura.gridx = 0;
-		gbc_label_altura.gridy = 0;
-		panel_center.add(label_altura, gbc_label_altura);
+		JLabel lblIntroducirAlturacm = new JLabel("Introducir altura (cm):");
+		GridBagConstraints gbc_lblIntroducirAlturacm = new GridBagConstraints();
+		gbc_lblIntroducirAlturacm.anchor = GridBagConstraints.WEST;
+		gbc_lblIntroducirAlturacm.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIntroducirAlturacm.gridx = 0;
+		gbc_lblIntroducirAlturacm.gridy = 0;
+		panel_center.add(lblIntroducirAlturacm, gbc_lblIntroducirAlturacm);
 		
 		// ------------ Campo ALTURA ----------
 		text_altura = new JTextField();
@@ -97,15 +95,13 @@ public class ViewBSAImpl extends JPanel implements ViewBSA {
 		// ---------------------------------------------------------------------
 		
 		// ------------ Etiqueta PESO ----------
-		JLabel label_peso = new JLabel("Peso (kg):");
-		label_peso.setFont(new Font("Segoe UI", Font.BOLD, 14));
-		label_peso.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_label_peso = new GridBagConstraints();
-		gbc_label_peso.anchor = GridBagConstraints.EAST;
-		gbc_label_peso.insets = new Insets(5, 5, 5, 5);
-		gbc_label_peso.gridx = 0;
-		gbc_label_peso.gridy = 2;
-		panel_center.add(label_peso, gbc_label_peso);
+		JLabel lblIntroducirPesokg = new JLabel("Introducir peso (kg):");
+		GridBagConstraints gbc_lblIntroducirPesokg = new GridBagConstraints();
+		gbc_lblIntroducirPesokg.anchor = GridBagConstraints.WEST;
+		gbc_lblIntroducirPesokg.insets = new Insets(5, 5, 5, 5);
+		gbc_lblIntroducirPesokg.gridx = 0;
+		gbc_lblIntroducirPesokg.gridy = 2;
+		panel_center.add(lblIntroducirPesokg, gbc_lblIntroducirPesokg);
 		
 		// ------------ Campo PESO ----------
 		text_peso = new JTextField();
@@ -138,19 +134,17 @@ public class ViewBSAImpl extends JPanel implements ViewBSA {
 		
 		// Tenemos que adaptar el tamaño del botón
 		// ------------ Botón CALCULAR ----------
-		btn_calcular = new JButton("Calcular");
-		btn_calcular.setBackground(Color.WHITE);
+		btn_calcular = new JButton("Calcular BSA");
 		GridBagConstraints gbc_btn_calcular = new GridBagConstraints();
 		gbc_btn_calcular.gridwidth  = 2;     						// Para que se vea en el centro
-		gbc_btn_calcular.insets     = new Insets(12, 5, 5, 0);
-		btn_calcular.setPreferredSize(new Dimension(160, 36));		// Para que se vea más grande
+		gbc_btn_calcular.insets     = new Insets(12, 5, 5, 0);		// Para que se vea más grande
 		gbc_btn_calcular.gridx = 0;
 		gbc_btn_calcular.gridy = 4;
 		panel_center.add(btn_calcular, gbc_btn_calcular);
 
 		// ------------ Etiqueta RESULTADO ----------
 		lbResultado = new JLabel("Resultado: ");
-		lbResultado.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		lbResultado.setFont(new Font("Arial", Font.BOLD, 18));
 		lbResultado.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lbResultado = new GridBagConstraints();
 		gbc_lbResultado.gridwidth = 2;
@@ -188,17 +182,6 @@ public class ViewBSAImpl extends JPanel implements ViewBSA {
 		gbc_warning_generico.gridx = 0;
 		gbc_warning_generico.gridy = 6;
 		panel_south.add(txt_warning_generico, BorderLayout.CENTER);
-		
-		/*
-		 * ================== PANEL NORTE ==========================
-		 * */
-		JPanel panel_north = new JPanel();
-		add(panel_north, BorderLayout.NORTH);
-		
-		// ------------ Etiqueta TÍTULO ----------
-		JLabel labelBSA = new JLabel("CÁLCULO DEL BSA");
-		labelBSA.setVerticalAlignment(SwingConstants.TOP);
-		panel_north.add(labelBSA);
 	}
 
 	
@@ -218,6 +201,7 @@ public class ViewBSAImpl extends JPanel implements ViewBSA {
 	@Override
 	public void setResult(String res) {
 		this.lbResultado.setText(res + " m²");
+		lbResultado.setForeground(new Color(0, 100, 0));
 		// Ocultar warning si hay éxito
 		this.txtArea_warning_alt.setText(" ");
 		this.txtArea_warning_peso.setText(" ");
