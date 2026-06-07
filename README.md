@@ -512,3 +512,6 @@ El hospital recibe pacientes internacionales, por lo que requerían dos versione
 * [CU-02: Calcular BSA](<doc/CASO DE USO BSA.txt>)
 * [CU-03: Calcular IBW](<doc/CASO DE USO IBW.txt>)
 * [CU-04: Introducir datos](<doc/CASO DE USO Introducir datos.txt>)
+
+## Práctica 8.
+[Tablero Kanban del proyecto](<doc/tableroKanban.png>)
